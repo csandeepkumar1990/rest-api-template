@@ -1,0 +1,108 @@
+/contacts:
+  post:
+    tags: ["Contacts"]
+    description: create contact
+    produces:
+      - application/json
+    parameters:
+      - name: name
+        description: name of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: type
+        description: type of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: description
+        description: description of the contact.
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: contacts
+
+  get:
+    tags: ["Contacts"]
+    description: contacts
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the contacts.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the contacts.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: contacts        
+
+/contacts/{id}:
+  get:
+    tags: ["Contacts"]
+    description: contacts
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: contactid of the contact.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: contacts
+
+
+  put:
+    tags: ["Contacts"]
+    description: Update a contacts
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: contactid of the contact.
+        in: path
+        required: true
+        type: string
+      - name: name
+        description: name of the contact.
+        in: formData
+        required: false
+        type: string
+      - name: type
+        description: type of the contact.
+        in: formData
+        required: false
+        type: string
+      - name: description
+        description: description of the contact.
+        in: formData
+        required: false
+        type: string
+      
+    responses:
+      200:   
+
+  delete:
+    tags: ["Contacts"]
+    description: Delete a contact
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: contactid of the contact.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: contacts        
