@@ -7,6 +7,8 @@ const capitalizeFirstLetter = (string) => {
 const distFileDir = './dist';
 const fsExtra = require('fs-extra')
 fsExtra.emptyDirSync(distFileDir);
+fsExtra.emptyDirSync('./models');
+fsExtra.emptyDirSync('./migrations');
 
 var arguments = process.argv.slice(2);
 const templateName = arguments[0];
@@ -15,9 +17,16 @@ const capitalTemplateName = capitalizeFirstLetter(templateName);
 //console.log(capitalTemplateName);
 console.log("Generating REST Template for : "+templateName);
 
+
+const { exec } = require("child_process");
+
+
+
 const templateDistDir = './dist/' +templateName;
 // With a callback:
 const generateTemplate = async () => {
+    await exec("sequelize init");
+    await exec("sequelize model:generate --name "+capitalTemplateName+" --attributes name:string,type:string,description:string,createdBy:string,updatedBy:string");
     await fsExtra.ensureDir(templateDistDir);
     await fsExtra.copy('./template', templateDistDir);
 
