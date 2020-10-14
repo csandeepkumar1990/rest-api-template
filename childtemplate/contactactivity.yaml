@@ -1,0 +1,140 @@
+/contacts/{contactId}/activity:
+  post:
+    tags: ["Contact Activity"]
+    description: create Contact Activity
+    produces:
+      - application/json
+    parameters:
+      - name: contactId
+        description: contactId of the contact.
+        in: path
+        required: true
+        type: string
+      - name: activityId
+        description: activityId of the Activity.
+        in: formData
+        required: true
+        type: string
+      - name: appointmentTime
+        description: appointmentTime of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: appointmentWith
+        description: appointmentWith of the Activity.
+        in: formData
+        required: true
+        type: string
+      - name: notes
+        description: notes of the contact.
+        in: formData
+        required: true
+        type: string
+     
+     
+    responses:
+      200:
+        description: Contact Activity
+
+
+  get:
+    tags: ["Contact Activity"]
+    description: Contact Activity
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the Contact Activity.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the Contact Activity.
+        in: query
+        required: true
+        type: integer
+      - name: contactId
+        description: contactid of the contact.
+        in: path
+        required: true
+        type: string
+    responses:
+      200:
+        description: Contact Activity      
+        
+/contacts/{contactId}/activity/{activityId}:
+  get:
+    tags: ["Contact Activity"]
+    description: Contact Activity
+    produces:
+      - application/json
+    parameters:
+      - name: contactId
+        description: contactId of the contact.
+        in: path
+        required: true
+        type: string  
+      - name: activityId
+        description: activityId of the activity.
+        in: path
+        required: true
+        type: string  
+    responses:
+      200:
+        description: Contact Activity        
+
+  put:
+    tags: ["Contact Activity"]
+    description: Update a Contact Activity
+    produces:
+      - application/json
+    parameters:
+      - name: contactId
+        description: contactId of the contact.
+        in: path
+        required: true
+        type: string
+      - name: activityId
+        description: activityId of the activity.
+        in: path
+        required: true
+        type: string
+      - name: appointmentTime
+        description: appointmentTime of the contact.
+        in: formData
+        required: false
+        type: string
+      - name: appointmentWith
+        description: appointmentWith of the Activity.
+        in: formData
+        required: false
+        type: string
+      - name: notes
+        description: notes of the contact.
+        in: formData
+        required: false
+        type: string
+     
+    responses:
+      200:   
+
+
+  delete:
+    tags: ["Contact Activity"]
+    description: Delete a activity
+    produces:
+      - application/json
+    parameters:
+      - name: contactId
+        description: contactid of the contact.
+        in: path
+        required: true
+        type: string  
+      - name: activityId
+        description: activityId of the activity.
+        in: path
+        required: true
+        type: string
+    responses:
+      200:
+        description: Contact Activity          
