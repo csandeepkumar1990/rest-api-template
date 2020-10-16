@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'rest-api-client';
+  field = '';
+
+  paranttemplate: string = "";
+  childtemplate: string = "";
+  command: string = "node .\\app.js " ;  
+  clickEvent(val){
+    this.field=this.field+"  "+val
+    
+  }
 }
