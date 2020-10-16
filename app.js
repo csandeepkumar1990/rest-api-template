@@ -57,6 +57,8 @@ const generateTemplate = async () => {
     };
     await replace(options);
 
+    //Adding fields to controller and yaml
+
     for (i = 0; i < args.length; i++) {
         var field = "field" + i;
         var fieldString = "field";
@@ -75,6 +77,8 @@ const generateTemplate = async () => {
         };
         await replace(option);
     }
+
+    //removing unused fields
 
     var expression1 = `.*${fieldString}.*`
     var regex1 = new RegExp(expression1, 'g')
@@ -123,6 +127,8 @@ const generateChildTemplate = async () => {
 
     await replace(options);
 
+    //Adding fields to controller and yaml
+
     for (i = 0; i < args.length; i++) {
         var field = "field" + i;
         var fieldString = "field";
@@ -141,7 +147,7 @@ const generateChildTemplate = async () => {
         };
         await replace(option);
     }
-
+    //Remove unused fields
     var expression1 = `.*${fieldString}.*`
     var regex1 = new RegExp(expression1, 'g')
 
