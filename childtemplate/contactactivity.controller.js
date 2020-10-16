@@ -11,11 +11,14 @@ exports.create = async (req, res) => {
   const contactActivity = {
     contactId: req.params.contactId,
     activityId: req.params.activityId,
-    appointmentTime: req.body.appointmentTime,
-    appointmentWith: req.body.appointmentWith,
-    notes: req.body.notes,
-    insertedBy: req.body.insertedBy,
-    updatedBy: req.body.updatedBy
+    field1: req.body.field1,
+    field2: req.body.field2,
+    field3: req.body.field3,
+    field4: req.body.field4,
+    field5: req.body.field5,
+    field: req.body.field6,
+    insertedBy: req.body.insertedBy
+    
   };
 
   try {
@@ -72,10 +75,12 @@ exports.update = async (req, res) => {
   }
 
   let contactActivity = {
-    appointmentTime: req.body.appointmentTime,
-    appointmentWith: req.body.appointmentWith,
-    notes: req.body.notes,
-    insertedBy: req.body.insertedBy,
+    field1: req.body.field1,
+    field2: req.body.field2,
+    field3: req.body.field3,
+    field4: req.body.field4,
+    field5: req.body.field5,
+    field6: req.body.field6,
     updatedBy: req.body.updatedBy
   };
 

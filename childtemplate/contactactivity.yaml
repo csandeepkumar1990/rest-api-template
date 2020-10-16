@@ -15,18 +15,33 @@
         in: formData
         required: true
         type: string
-      - name: appointmentTime
-        description: appointmentTime of the contact.
+      - name: field1
+        description: field1 of the payment.
         in: formData
         required: true
         type: string
-      - name: appointmentWith
-        description: appointmentWith of the Activity.
+      - name: field2
+        description: field2 of the Gateway.
         in: formData
         required: true
         type: string
-      - name: notes
-        description: notes of the contact.
+      - name: field3
+        description: field3 of the payment.
+        in: formData
+        required: true
+        type: string
+      - name: field4
+        description: field4 of the payment.
+        in: formData
+        required: true
+        type: string
+      - name: field5
+        description: field5 of the Gateway.
+        in: formData
+        required: true
+        type: string
+      - name: field6
+        description: field6 of the payment.
         in: formData
         required: true
         type: string
@@ -99,20 +114,35 @@
         in: path
         required: true
         type: string
-      - name: appointmentTime
-        description: appointmentTime of the contact.
+      - name: field1
+        description: field1 of the payment.
         in: formData
-        required: false
+        required: true
         type: string
-      - name: appointmentWith
-        description: appointmentWith of the Activity.
+      - name: field2
+        description: field2 of the Gateway.
         in: formData
-        required: false
+        required: true
         type: string
-      - name: notes
-        description: notes of the contact.
+      - name: field3
+        description: field3 of the payment.
         in: formData
-        required: false
+        required: true
+        type: string
+      - name: field4
+        description: field4 of the payment.
+        in: formData
+        required: true
+        type: string
+      - name: field5
+        description: field5 of the Gateway.
+        in: formData
+        required: true
+        type: string
+      - name: field6
+        description: field6 of the payment.
+        in: formData
+        required: true
         type: string
      
     responses:

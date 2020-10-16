@@ -12,20 +12,15 @@ const fsExtra = require('fs-extra')
 
 var arguments = process.argv.slice(2, 3);
 var arguments2 = process.argv.slice(3);
+var isChild = process.argv.slice(3, 4);
+
+var args = process.argv.slice(3);
 const templateName = arguments[0];
 const childtemplateName = arguments2[0];
 const childfileName = arguments[0] + "" + arguments2[0];
 
-// console.log("childtemplateName11-------------");
-// console.log(childtemplateName);
-// console.log("childfilenae-------------");
-// console.log(childfileName);
-// console.log();
-
-//console.log(templateName);
 const capitalTemplateName = capitalizeFirstLetter(templateName);
 const capitalChildTemplateName = capitalizeFirstLetter(childtemplateName);
-//console.log(capitalTemplateName);
 console.log("Generating REST Template for : " + templateName);
 
 
@@ -61,13 +56,46 @@ const generateTemplate = async () => {
         to: [templateName, capitalTemplateName],
     };
     await replace(options);
+
+    for (i = 0; i < args.length; i++) {
+        var field = "field" + i;
+        var fieldString = "field";
+
+        var expression = `${field}`
+        var regex = new RegExp(expression, 'g')
+
+        const option = {
+            files: [
+                './dist/' + templateName + '/*.*',
+                './dist/' + templateName + '/*.yaml'
+            ],
+            //Replacement for  fields (string or regex) 
+            from: [regex],
+            to: [args[i]],
+        };
+        await replace(option);
+    }
+
+    var expression1 = `.*${fieldString}.*`
+    var regex1 = new RegExp(expression1, 'g')
+
+    const option1 = {
+        files: [
+            './dist/' + templateName + '/*.*',
+            './dist/' + templateName + '/*.yaml'
+        ],
+        //Remove unused fields in files to make (string or regex) 
+        from: [regex1],
+        to: [''],
+    };
+    await replace(option1);
+
+
     console.log('*******************************');
     console.log('Template generated successfully');
     console.log('*******************************');
-
-
-
 }
+
 const generateChildTemplate = async () => {
     await exec("sequelize init");
     await exec("sequelize model:generate --name " + capitalTemplateName + " --attributes name:string,type:string,description:string,createdBy:string,updatedBy:string");
@@ -92,28 +120,52 @@ const generateChildTemplate = async () => {
         from: [/contact/g, /Contact/g, /activity/g, /Activity/g],
         to: [templateName, capitalTemplateName, childtemplateName, capitalChildTemplateName],
     };
-    const options1 = {
+
+    await replace(options);
+
+    for (i = 0; i < args.length; i++) {
+        var field = "field" + i;
+        var fieldString = "field";
+
+        var expression = `${field}`
+        var regex = new RegExp(expression, 'g')
+
+        const option = {
+            files: [
+                './dist/' + childfileName + '/*.*',
+                './dist/' + childfileName + '/*.yaml'
+            ],
+            //Replacement for  fields (string or regex) 
+            from: [regex],
+            to: [args[i]],
+        };
+        await replace(option);
+    }
+
+    var expression1 = `.*${fieldString}.*`
+    var regex1 = new RegExp(expression1, 'g')
+
+    const option1 = {
         files: [
             './dist/' + childfileName + '/*.*',
             './dist/' + childfileName + '/*.yaml'
         ],
-        //Replacement to make (string or regex) 
-        from: [/activiy/g, /Activity/g],
-        to: [childtemplateName, capitalChildTemplateName],
+        //Remove unused fields to make (string or regex) 
+        from: [regex1],
+        to: [''],
     };
-    await replace(options);
-    await replace(options1);
+    await replace(option1);
+
     console.log('*******************************');
     console.log('Child Template generated successfully');
     console.log('*******************************');
-    console.log(childtemplateName);
-    console.log(capitalChildTemplateName);
+
 }
 
-if (arguments2 != "false") {
+if (isChild != "false") {
     generateChildTemplate();
 }
-else{
+else {
     generateTemplate();
 }
 

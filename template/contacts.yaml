@@ -5,18 +5,63 @@
     produces:
       - application/json
     parameters:
-      - name: name
-        description: name of the contact.
+      - name: field1
+        description: field1 of the contact.
         in: formData
         required: true
         type: string
-      - name: type
-        description: type of the contact.
+      - name: field2
+        description: field2 of the contact.
         in: formData
         required: true
         type: string
-      - name: description
-        description: description of the contact.
+      - name: field3
+        description: field3 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field4
+        description: field4 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field5
+        description: field5 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field6
+        description: field6 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field4
+        description: field4 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field5
+        description: field5 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field6
+        description: field6 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field7
+        description: field7 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field8
+        description: field8 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field9
+        description: field9 of the contact.
         in: formData
         required: true
         type: string
@@ -73,20 +118,65 @@
         in: path
         required: true
         type: string
-      - name: name
-        description: name of the contact.
+      - name: field1
+        description: field1 of the contact.
         in: formData
-        required: false
+        required: true
         type: string
-      - name: type
-        description: type of the contact.
+      - name: field2
+        description: field2 of the contact.
         in: formData
-        required: false
+        required: true
         type: string
-      - name: description
-        description: description of the contact.
+      - name: field3
+        description: field3 of the contact.
         in: formData
-        required: false
+        required: true
+        type: string
+      - name: field4
+        description: field4 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field5
+        description: field5 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field6
+        description: field6 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field4
+        description: field4 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field5
+        description: field5 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field6
+        description: field6 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field7
+        description: field7 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field8
+        description: field8 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field9
+        description: field9 of the contact.
+        in: formData
+        required: true
         type: string
       
     responses:
