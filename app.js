@@ -100,6 +100,8 @@ const generateTemplate = async () => {
     console.log('*******************************');
 }
 
+///////////////////////// child template
+
 const generateChildTemplate = async () => {
     await exec("sequelize init");
     await exec("sequelize model:generate --name " + capitalTemplateName + " --attributes name:string,type:string,description:string,createdBy:string,updatedBy:string");
