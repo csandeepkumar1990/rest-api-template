@@ -80,8 +80,8 @@ const generateTemplate = async () => {
 
     //removing unused fields
 
-    var expression1 = `.*${fieldString}.*`
-    var regex1 = new RegExp(expression1, 'g')
+    var dropFieldsExpr = `.*${fieldString}.*`
+    var regexDropFields = new RegExp(dropFieldsExpr, 'g')
 
     const option1 = {
         files: [
@@ -89,7 +89,7 @@ const generateTemplate = async () => {
             './dist/' + templateName + '/*.yaml'
         ],
         //Remove unused fields in files to make (string or regex) 
-        from: [regex1],
+        from: [regexDropFields],
         to: [''],
     };
     await replace(option1);
@@ -150,8 +150,8 @@ const generateChildTemplate = async () => {
         await replace(option);
     }
     //Remove unused fields
-    var expression1 = `.*${fieldString}.*`
-    var regex1 = new RegExp(expression1, 'g')
+    var dropFieldsExpr = `.*${fieldString}.*`
+    var regexDropFields = new RegExp(dropFieldsExpr, 'g')
 
     const option1 = {
         files: [
@@ -159,7 +159,7 @@ const generateChildTemplate = async () => {
             './dist/' + childfileName + '/*.yaml'
         ],
         //Remove unused fields to make (string or regex) 
-        from: [regex1],
+        from: [regexDropFields],
         to: [''],
     };
     await replace(option1);
