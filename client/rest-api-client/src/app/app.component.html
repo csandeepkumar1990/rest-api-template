@@ -146,7 +146,7 @@
         <div class="row">
           <div class="col">
             <label for="exampleFormControlTextarea1">Command to be executed</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #inputTarget>
             {{command}} {{paranttemplate}} {{childtemplate}} {{field}}
           </textarea>
           </div>
@@ -154,7 +154,7 @@
 
 
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Copy command to Clipboard</button>
+        <button class="btn btn-primary btn-lg btn-block" type="button" [ngxClipboard]="inputTarget">Copy command to Clipboard</button>
       </form>
     </div>
 

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
  import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
- 
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
