@@ -22,7 +22,7 @@ const childfileName = arguments[0] + "" + arguments2[0];
 const capitalTemplateName = capitalizeFirstLetter(templateName);
 const capitalChildTemplateName = capitalizeFirstLetter(childtemplateName);
 console.log("Generating REST Template for : " + templateName);
-
+var migrationFields = "";
 
 const { exec } = require("child_process");
 
@@ -32,10 +32,10 @@ const templateDistDir = './dist/' + templateName;
 const childtemplateDistDir = './dist/' + childfileName;
 // With a callback:
 const generateTemplate = async () => {
-    await exec("sequelize init");
-    await exec("sequelize model:generate --name " + capitalTemplateName + " --attributes name:string,type:string,description:string,createdBy:string,updatedBy:string");
+
     await fsExtra.ensureDir(templateDistDir);
     await fsExtra.copy('./template', templateDistDir);
+
 
     const files = await fsExtra.readdir(templateDistDir);
     for (let name of files) {
@@ -59,12 +59,14 @@ const generateTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (i = 0; i < args.length; i++) {
+    for (i = 1; i < args.length; i++) {
         var field = "field" + i;
         var fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
+
+        migrationFields = migrationFields + args[i] + ":string,"
 
         const option = {
             files: [
@@ -78,12 +80,14 @@ const generateTemplate = async () => {
         await replace(option);
     }
 
+    migrationFields = migrationFields + "name:string,type:string,description:string,createdBy:string,updatedBy:string"
+
     //removing unused fields
 
-    var dropFieldsExpr = `.*${fieldString}.*`
-    var regexDropFields = new RegExp(dropFieldsExpr, 'g')
+    var dropFieldsExpression = `.*${fieldString}.*`
+    var regexDropFields = new RegExp(dropFieldsExpression, 'g')
 
-    const option1 = {
+    const dropFieldsOption = {
         files: [
             './dist/' + templateName + '/*.*',
             './dist/' + templateName + '/*.yaml'
@@ -92,19 +96,23 @@ const generateTemplate = async () => {
         from: [regexDropFields],
         to: [''],
     };
-    await replace(option1);
+    await replace(dropFieldsOption);
+    
+
+    //migration file command
+    await exec("sequelize init");
+    await exec("sequelize model:generate --name " + capitalTemplateName + " --attributes  " + migrationFields);
 
 
     console.log('*******************************');
     console.log('Template generated successfully');
     console.log('*******************************');
+
 }
 
 ///////////////////////// child template
 
 const generateChildTemplate = async () => {
-    await exec("sequelize init");
-    await exec("sequelize model:generate --name " + capitalTemplateName + " --attributes name:string,type:string,description:string,createdBy:string,updatedBy:string");
     await fsExtra.ensureDir(childtemplateDistDir);
     await fsExtra.copy('./childtemplate', childtemplateDistDir);
 
@@ -138,6 +146,8 @@ const generateChildTemplate = async () => {
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
 
+        migrationFields = migrationFields + args[i] + ":string,"
+
         const option = {
             files: [
                 './dist/' + childfileName + '/*.*',
@@ -149,11 +159,13 @@ const generateChildTemplate = async () => {
         };
         await replace(option);
     }
-    //Remove unused fields
-    var dropFieldsExpr = `.*${fieldString}.*`
-    var regexDropFields = new RegExp(dropFieldsExpr, 'g')
+    migrationFields = migrationFields + "name:string,type:string,description:string,createdBy:string,updatedBy:string"
 
-    const option1 = {
+    //Remove unused fields
+    var dropFieldsExpression = `.*${fieldString}.*`
+    var regexDropFields = new RegExp(dropFieldsExpression, 'g')
+
+    const dropFieldsOption = {
         files: [
             './dist/' + childfileName + '/*.*',
             './dist/' + childfileName + '/*.yaml'
@@ -162,7 +174,11 @@ const generateChildTemplate = async () => {
         from: [regexDropFields],
         to: [''],
     };
-    await replace(option1);
+    await replace(dropFieldsOption);
+
+    //migration file command
+    await exec("sequelize init");
+    await exec("sequelize model:generate --name " + childfileName + " --attributes  " + migrationFields)
 
     console.log('*******************************');
     console.log('Child Template generated successfully');
