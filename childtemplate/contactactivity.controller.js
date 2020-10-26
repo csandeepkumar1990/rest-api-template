@@ -1,4 +1,4 @@
-var ContactActivityService = require('../services/contactactivity.service');
+var ContactActivityService = require('../services/contactactivitys.service');
 
 const { validationResult } = require('express-validator');
 

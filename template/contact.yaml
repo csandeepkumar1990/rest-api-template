@@ -1,6 +1,6 @@
-/contacts:
+/contact:
   post:
-    tags: ["Contacts"]
+    tags: ["Contact"]
     description: create contact
     produces:
       - application/json
@@ -68,32 +68,32 @@
      
     responses:
       200:
-        description: contacts
+        description: contact
 
   get:
-    tags: ["Contacts"]
-    description: contacts
+    tags: ["Contact"]
+    description: contact
     produces:
       - application/json
     parameters:
       - name: page
-        description: page of the contacts.
+        description: page of the contact.
         in: query
         required: true
         type: integer
       - name: limit
-        description: limit of the contacts.
+        description: limit of the contact.
         in: query
         required: true
         type: integer
     responses:
       200:
-        description: contacts        
+        description: contact        
 
-/contacts/{id}:
+/contact/{id}:
   get:
-    tags: ["Contacts"]
-    description: contacts
+    tags: ["Contact"]
+    description: contact
     produces:
       - application/json
     parameters:
@@ -104,12 +104,12 @@
         type: string     
     responses:
       200:
-        description: contacts
+        description: contact
 
 
   put:
-    tags: ["Contacts"]
-    description: Update a contacts
+    tags: ["Contact"]
+    description: Update a contact
     produces:
       - application/json
     parameters:
@@ -183,7 +183,7 @@
       200:   
 
   delete:
-    tags: ["Contacts"]
+    tags: ["Contact"]
     description: Delete a contact
     produces:
       - application/json
@@ -195,4 +195,4 @@
         type: string 
     responses:
       200:
-        description: contacts        
+        description: contact        

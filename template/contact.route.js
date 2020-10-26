@@ -1,15 +1,15 @@
-const ContactsController = require('../controllers/contacts.controller.js');
+const ContactController = require('../controllers/contact.controller.js');
 const ContactFilesController = require('../controllers/contactfiles.controller.js');
 
 const express = require('express');
 var router = express.Router();
 const auth = require('./auth');
 
-router.post('/',  ContactsController.create);
-router.get('/',  ContactsController.getAll);
-router.get('/:id',  ContactsController.get);
-router.put('/:id', ContactsController.update);
-router.delete('/:id', ContactsController.delete);
+router.post('/',  ContactController.create);
+router.get('/',  ContactController.getAll);
+router.get('/:id',  ContactController.get);
+router.put('/:id', ContactController.update);
+router.delete('/:id', ContactController.delete);
 
 router.post('/:contactId/files',  ContactFilesController.create);
 router.get('/:contactId/files',  ContactFilesController.getAll);

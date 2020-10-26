@@ -66,6 +66,9 @@ const generateTemplate = async () => {
     //Adding fields to controller and yaml
 
     for (i = 1; i < args.length; i++) {
+
+        console.log("args[i]args[i]----------------")
+        console.log(args[i])
         var field = "field" + i;
         var fieldString = "field";
 
@@ -140,7 +143,7 @@ const generateChildTemplate = async () => {
         ],
         //Replacement to make (string or regex) 
         from: [/contact/g, /Contact/g, /activity/g, /Activity/g],
-        to: [templateName, capitalTemplateName, childtemplateName, capitalChildTemplateName],
+        to: [templateName, capitalTemplateName, childtemplateName.slice(0, -1), capitalChildTemplateName.slice(0, -1)],
     };
 
     await replace(options);
@@ -148,15 +151,21 @@ const generateChildTemplate = async () => {
     //Adding fields to controller and yaml
 
     for (i = 1; i < args.length; i++) {
+        console.log("args[i]args[i]----------------")
+        console.log(args[i])
         var field = "field" + i;
         var fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
 
-        migrationFields = migrationFields + args[i] + ":string,"
-    
+        migrationFields = migrationFields + args[i] + ":string,";
 
+        if(i==2 && (args[i].slice(0, -1) || args[i].slice(0, -1) ))
+        {
+            args[i]=args[i].slice(0, -1)
+
+        }
         const option = {
             files: [
                 './dist/' + childfileName + '/*.*',

@@ -25,17 +25,15 @@ exports.update = async (data, query) => {
     }
 }
 
-exports.delete = async (query) => {
 
+exports.delete = async (query) => {
+    const t = await db.sequelize.transaction();
     try {
-        const t = await db.sequelize.transaction();
         let contact = await ContactModel.destroy(query, { transaction: t });
-        if (contact === 1) {
-            return ({ message: "delete success for id: " + query.where.id, code: 200 });
-        }
         await t.commit();
         return contact;
     } catch (err) {
+        await t.rollback();
         throw ({ message: err.message || "Error occurred while deleting the Contact.", code: err.code || 500 });
     }
 }

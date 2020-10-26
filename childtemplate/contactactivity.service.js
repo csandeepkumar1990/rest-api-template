@@ -1,5 +1,5 @@
 const db = require("../models");
-const ContactActivityModel = db.contactActivityModel
+const ContactActivityModel = db.contactActivitysModel
 const ContactModel = db.contactsModel
 
 

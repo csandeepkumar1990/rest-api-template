@@ -1,4 +1,4 @@
-/contact/{contactId}/activity:
+/contact/{contactId}/activitys:
   post:
     tags: ["Contact Activity"]
     description: create Contact Activity
@@ -6,42 +6,42 @@
       - application/json
     parameters:
       - name: contactId
-        description: contactId of the contact.
+        description: contactId of the ContactActivity.
         in: path
         required: true
         type: string
       - name: activityId
-        description: activityId of the Activity.
+        description: activityId of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field1
-        description: field1 of the payment.
+        description: field1 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field2
-        description: field2 of the Gateway.
+        description: field2 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field3
-        description: field3 of the payment.
+        description: field3 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field4
-        description: field4 of the payment.
+        description: field4 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field5
-        description: field5 of the Gateway.
+        description: field5 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field6
-        description: field6 of the payment.
+        description: field6 of the ContactActivity.
         in: formData
         required: true
         type: string
@@ -69,7 +69,7 @@
         required: true
         type: integer
       - name: contactId
-        description: contactid of the contact.
+        description: contactid of the Contact Activity.
         in: path
         required: true
         type: string
@@ -105,42 +105,42 @@
       - application/json
     parameters:
       - name: contactId
-        description: contactId of the contact.
+        description: contactId of the ContactActivity.
         in: path
         required: true
         type: string
       - name: activityId
-        description: activityId of the activity.
+        description: activityId of the ContactActivity.
         in: path
         required: true
         type: string
       - name: field1
-        description: field1 of the payment.
+        description: field1 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field2
-        description: field2 of the Gateway.
+        description: field2 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field3
-        description: field3 of the payment.
+        description: field3 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field4
-        description: field4 of the payment.
+        description: field4 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field5
-        description: field5 of the Gateway.
+        description: field5 of the ContactActivity.
         in: formData
         required: true
         type: string
       - name: field6
-        description: field6 of the payment.
+        description: field6 of the ContactActivity.
         in: formData
         required: true
         type: string
@@ -156,12 +156,12 @@
       - application/json
     parameters:
       - name: contactId
-        description: contactid of the contact.
+        description: contactid of the ContactActivity.
         in: path
         required: true
         type: string  
       - name: activityId
-        description: activityId of the activity.
+        description: activityId of the ContactActivity.
         in: path
         required: true
         type: string

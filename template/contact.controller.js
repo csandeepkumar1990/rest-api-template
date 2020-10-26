@@ -1,4 +1,4 @@
-var ContactService = require('../services/contacts.service');
+var ContactService = require('../services/contact.service');
 
 const { validationResult } = require('express-validator');
 
@@ -17,7 +17,7 @@ exports.create = async (req, res) => {
     field6: req.body.field6,
     field7: req.body.field7,
     field8: req.body.field8,
-    field9: req.body.field9
+    createdBy: req.body.createdBy
   };
 
   try {
@@ -89,7 +89,7 @@ exports.update = async (req, res) => {
       field6: req.body.field6,
       field7: req.body.field7,
       field8: req.body.field8,
-      field9: req.body.field9
+      updatedBy: req.body.updatedBy
     }
 
     const query = {
@@ -110,6 +110,8 @@ exports.update = async (req, res) => {
   }
 };
 
+
+
 exports.delete = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -121,13 +123,13 @@ exports.delete = async (req, res) => {
       where: {
         id: req.params.id
       }
-
     }
-    let foundContact = await ContactService.get(query);
-    if (!foundContact)
-      return ({ message: "Contact not found for the given contact id: " + query.where.id, code: 500 });
-    var updatedContact = await ContactService.delete(query);
-    res.send(updatedContact);
+    const updatedContact = await ContactService.delete(query);
+    if (updatedContact === 1) {
+      res.status(200).send({ message: "delete success for contact id: " + query.where.id, code: 200 });
+    } else {
+      res.status(200).send({ message: "not found for contact id: " + query.where.id, code: 200 });
+    }
   } catch (err) {
     res.status(500).send({
       message: err.message || "Error occurred while deleting the Contact.", code: err.code || 500

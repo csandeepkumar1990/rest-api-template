@@ -1,4 +1,4 @@
-const ContactactivityController = require('../controllers/contactactivity.controller.js');
+const ContactactivityController = require('../controllers/contactactivitys.controller.js');
 const express = require('express');
 var router = express.Router();
 
