@@ -15,21 +15,30 @@ var arguments2 = process.argv.slice(3);
 var isChild = process.argv.slice(3, 4);
 
 var args = process.argv.slice(3);
-const templateName = arguments[0];
+var templateName = arguments[0];
 const childtemplateName = arguments2[0];
-const childfileName = arguments[0] + "" + arguments2[0];
+var childfileName = arguments[0] + "" + arguments2[0];
 
-const capitalTemplateName = capitalizeFirstLetter(templateName);
+var capitalTemplateName = capitalizeFirstLetter(templateName);
 const capitalChildTemplateName = capitalizeFirstLetter(childtemplateName);
 console.log("Generating REST Template for : " + templateName);
+
+
 var migrationFields = "";
 
 const { exec } = require("child_process");
 
+// remove "s" from parent-child:
+if(isChild != "false" && (templateName.substr(-1)=='s' || templateName.substr(-1)=="S"))
+    {
+        templateName=templateName.slice(0, -1)
+        capitalTemplateName=capitalTemplateName.slice(0, -1)
+        childfileName = arguments[0].slice(0, -1) + "" + arguments2[0];
+        var childtemplateDistDir = './dist/' + childfileName;
+    }
+var templateDistDir = './dist/' + templateName;
+var childtemplateDistDir = './dist/' + childfileName;
 
-
-const templateDistDir = './dist/' + templateName;
-const childtemplateDistDir = './dist/' + childfileName;
 // With a callback:
 const generateTemplate = async () => {
 
@@ -39,11 +48,8 @@ const generateTemplate = async () => {
 
     const files = await fsExtra.readdir(templateDistDir);
     for (let name of files) {
-        console.log(name);
         let workingDir = templateDistDir + '/' + name;
         let destinationDir = workingDir.replace(/contact/g, templateName)
-        console.log(workingDir);
-        console.log(destinationDir);
         await fsExtra.rename(workingDir, destinationDir);
     };
     const options = {
@@ -116,6 +122,7 @@ const generateChildTemplate = async () => {
     await fsExtra.ensureDir(childtemplateDistDir);
     await fsExtra.copy('./childtemplate', childtemplateDistDir);
 
+
     const files = await fsExtra.readdir(childtemplateDistDir);
     for (let name of files) {
         console.log(name);
@@ -125,6 +132,7 @@ const generateChildTemplate = async () => {
         console.log(destinationDir);
         await fsExtra.rename(workingDir, destinationDir);
     };
+    
     const options = {
         files: [
             './dist/' + childfileName + '/*.*',
@@ -139,7 +147,7 @@ const generateChildTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (i = 0; i < args.length; i++) {
+    for (i = 1; i < args.length; i++) {
         var field = "field" + i;
         var fieldString = "field";
 
@@ -147,6 +155,7 @@ const generateChildTemplate = async () => {
         var regex = new RegExp(expression, 'g')
 
         migrationFields = migrationFields + args[i] + ":string,"
+    
 
         const option = {
             files: [

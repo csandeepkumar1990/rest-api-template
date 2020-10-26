@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
     field3: req.body.field3,
     field4: req.body.field4,
     field5: req.body.field5,
-    field: req.body.field6,
+    field6: req.body.field6,
     insertedBy: req.body.insertedBy
     
   };
