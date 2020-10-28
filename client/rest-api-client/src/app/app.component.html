@@ -1,68 +1,13 @@
-<style>
-  .myDiv {
-    border: 5px outset red;
-    background-color: lightblue;
-    text-align: center;
-  }
-</style>
-<div class="myDiv">
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <h5 class="my-0 mr-md-auto font-weight-normal">CAK Consulting</h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="#">Features</a>
-      <a class="p-2 text-dark" href="#">Enterprise</a>
-      <a class="p-2 text-dark" href="#">Support</a>
-      <a class="p-2 text-dark" href="#">Pricing</a>
-    </nav>
-    <a class="btn btn-outline-primary" href="#">Sign up</a>
-  </div>
-  <h1>Command Generator</h1>
-
-
-
-
-  <h4 class="mb-3">Api Type</h4>
-  <input type="radio" id="com" name="communication" value="full" (click)="function(3)">Parent
-  <input type="radio" id="com" name="communication" value="full" (click)="function(1)">Child
-
-  <input type="radio" id="com2" name="communication" value="half" (click)="function(2)">File
-
-  <h2>Parent template name</h2>
-  <input [(ngModel)]="paranttemplate" /> <br /><br />
-  <p> {{paranttemplate}} </p>
-
-  <div *ngIf="Flag1==true" id="Flag1" [disabled]="Flag1" [(ngModel)]="childtemplate" ngDefaultControl>
-
-    <h2>Child template name</h2>
-    <input [(ngModel)]="childtemplate" placeholder="Enter false if no child template needed" /> <br /><br />
-    <p> {{childtemplate}} </p>
-
-  </div>
-
-
-  <h2>Enter Fields</h2>
-  <input (ngModel)="field" placeholder="Add a fields" aria-label="Recipient's username" aria-describedby="basic-addon1"
-    #name>
-  <div>
-    <button (click)="clickEvent(name.value)">Click Me</button>
-  </div>
-  <br /><br />
-  <h2>Command to be executed</h2>
-  <div class="row">
-    <div class="col">
-      <label for="exampleFormControlTextarea1">Command to be executed</label>
-      <textarea id="exampleFormControlTextarea1" rows="3">
-    {{command}} {{paranttemplate}} {{childtemplate}} {{field}}
-  </textarea>
-    </div>
-  </div>
-
-  <button type="submit">Copy command to Clipboard</button>
-
-
-
-
-  <div>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+  <h5 class="my-0 mr-md-auto font-weight-normal">CAK Consulting</h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="#">Features</a>
+    <a class="p-2 text-dark" href="#">Enterprise</a>
+    <a class="p-2 text-dark" href="#">Support</a>
+    <a class="p-2 text-dark" href="#">Pricing</a>
+  </nav>
+  <a class="btn btn-outline-primary" href="#">Sign up</a>
+</div>
 
     <div class="container">
       <div class="py-5 text-center">
@@ -89,23 +34,6 @@
                   Please select a valid country.
                 </div>
               </div>
-              <!-- <div class="col-md-4 mb-3">
-            <label for="state">State</label>
-            <select class="custom-select d-block w-100" id="state" required>
-              <option value="">Choose...</option>
-              <option>California</option>
-            </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="zip">Zip</label>
-            <input type="text" class="form-control" id="zip" placeholder="" required>
-            <div class="invalid-feedback">
-              Zip code required.
-            </div>
-          </div> -->
             </div>
             <div class="row">
               <div class="col">
@@ -113,26 +41,42 @@
 
                 <div class="d-block my-3">
                   <div class="custom-control custom-radio">
-                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required (click)="onSelectApiType('parent')">
                     <label class="custom-control-label" for="credit">Parent</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required (click)="onSelectApiType('child')">
                     <label class="custom-control-label" for="debit">Child</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required (click)="onSelectApiType('file')">
                     <label class="custom-control-label" for="paypal">File</label>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row">
+              <div class="col-md-6 mb-3" *ngIf="parentTemplateVisibility">
+                <label for="lastName">Parent name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required [(ngModel)]="parentTemplateValue" [ngModelOptions]="{standalone: true}">
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+              
 
 
-              <div class="col-md-6 mb-3">
+              <div class="col-md-6 mb-3" *ngIf="childTemplateVisibility">
                 <label for="lastName">Child name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required [(ngModel)]="childTemplateValue" [ngModelOptions]="{standalone: true}">
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3" *ngIf="fileTemplateVisibility">
+                <label for="lastName">File name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required [(ngModel)]="fileTemplateValue" [ngModelOptions]="{standalone: true}">
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
@@ -142,9 +86,9 @@
               <div class="col">
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Add a field" aria-label="Recipient's username"
-                    aria-describedby="button-addon2">
+                    aria-describedby="button-addon2"  [(ngModel)]="fieldName" [ngModelOptions]="{standalone: true}">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2">Button</button>
+                    <button class="btn btn-outline-primary" type="button" id="button-addon2" (click)="addField()">Add</button>
                   </div>
                 </div>
               </div>
@@ -153,11 +97,10 @@
               <div class="col">
                 <h4 class="mb-3">Fields</h4>
                 <ul class="list-group">
-                  <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
-                  <li class="list-group-item">Dapibus ac facilisis in</li>
-                  <li class="list-group-item">Morbi leo risus</li>
-                  <li class="list-group-item">Porta ac consectetur ac</li>
-                  <li class="list-group-item">Vestibulum at eros</li>
+                  <li class="list-group-item" *ngFor="let field of fields">
+                    {{field}} <button class="btn btn-sm btn-danger" type="button" (click)="removeField(field)">Remove</button>
+                  </li>
+                 
                 </ul>
               </div>
             </div>
@@ -165,8 +108,8 @@
             <div class="row">
               <div class="col">
                 <label for="exampleFormControlTextarea1">Command to be executed</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #inputTarget>
-            {{command}} {{paranttemplate}} {{childtemplate}} {{field}}
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #inputTarget [(ngModel)]="command" [ngModelOptions]="{standalone: true}"> 
+            
           </textarea>
               </div>
             </div>
@@ -181,7 +124,7 @@
       </div>
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 Company Name</p>
+        <p class="mb-1">&copy; 2020-2021 CAK Consulting</p>
         <ul class="list-inline">
           <li class="list-inline-item"><a href="#">Privacy</a></li>
           <li class="list-inline-item"><a href="#">Terms</a></li>

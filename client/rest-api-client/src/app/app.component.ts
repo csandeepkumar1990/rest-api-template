@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
+
 
 @Component({
   selector: 'app-root',
@@ -6,39 +8,99 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  name = 'Angular';
+  
+  productForm: FormGroup;
+  fieldName: any = '';
+  fields: any = [];
+  fieldCommand: any = '';
+  parentTemplateVisibility: boolean = true;
+  childTemplateVisibility: boolean = false;
+  fileTemplateVisibility: boolean = false;
+   
+  constructor(private fb:FormBuilder) {
+   
+    this.productForm = this.fb.group({
+      quantities: this.fb.array([]) ,
+    });
+  }
+  
+  quantities() : FormArray {
+    return this.productForm.get("quantities") as FormArray
+  }
+   
+  newQuantity(): FormGroup {
+    return this.fb.group({
+      qty: '',
+    })
+  }
+   
+  addQuantity() {
+    this.quantities().push(this.newQuantity());
+  }
+   
+  removeQuantity(i:number) {
+    this.quantities().removeAt(i);
+  }
+   
+  onSubmit() {
+    console.log(this.productForm.value);
+  }
+  
   field = '';
   options: boolean = false;
 
-  paranttemplate: string = "";
-  childtemplate: string = "false";
-  command: string = "node .\\app.js " + this.paranttemplate;
+  parentTemplateValue: string = "";
+  childTemplateValue: string = "child=false";
+  fileTemplateValue: string = "file=false";
+  command: string = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand;
+  
   clickEvent(val) {
     this.field = this.field + "  " + val
 
   }
 
-  Flag1 = false;
-  Flag2 = false;
-  Flag3 = false;
-  function(x) {
-    if (x == 1) {
-      this.Flag1 = true;
-      this.childtemplate = ""
-
-    }
-    else if (x == 2) {
-
-
-      this.Flag2 = true;
-
-
-    }
-    else if (x == 3) {
-
-      this.Flag1 = false;
-
-    }
+  addField() {
+    console.log('sdfsdf');
+    
+    this.fields.push(this.fieldName);
+    this.fieldName = '';
+    console.log(this.fields);
+    this.generateFieldCommand();
   }
 
+  removeField(fieldName) {
+    const index: number = this.fields.indexOf(fieldName);
+    if (index !== -1) {
+        this.fields.splice(index, 1);
+    } 
+    this.generateFieldCommand(); 
+  }
 
+  generateFieldCommand() {
+    this.fieldCommand = this.fields.join(' ');
+    console.log(this.fieldCommand);
+    this.command = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand;
+  }
+
+  onSelectApiType(apiType) { 
+    if (apiType === 'parent') {
+      this.childTemplateVisibility = false;
+      this.fileTemplateVisibility = false;
+      this.childTemplateValue = "child=false"
+      this.fileTemplateValue = "file=false"
+    }
+    else if (apiType === 'child') {
+      this.childTemplateVisibility = true;
+      this.fileTemplateVisibility = false;
+      this.childTemplateValue = ""
+      this.fileTemplateValue = "file=false"
+    }
+    else if (apiType === 'file') {
+      this.childTemplateVisibility = false;
+      this.fileTemplateVisibility = true;
+      this.childTemplateValue = "child=false"
+      this.fileTemplateValue = "files"
+    }
+  }
 }
