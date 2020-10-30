@@ -5,11 +5,6 @@
     produces:
       - application/json
     parameters:
-      - name: field1
-        description: field1 of the contact.
-        in: formData
-        required: true
-        type: string
       - name: field2
         description: field2 of the contact.
         in: formData
@@ -62,6 +57,11 @@
         type: string
       - name: field9
         description: field9 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field10
+        description: field1 of the contact.
         in: formData
         required: true
         type: string
@@ -118,11 +118,6 @@
         in: path
         required: true
         type: string
-      - name: field1
-        description: field1 of the contact.
-        in: formData
-        required: true
-        type: string
       - name: field2
         description: field2 of the contact.
         in: formData
@@ -175,6 +170,11 @@
         type: string
       - name: field9
         description: field9 of the contact.
+        in: formData
+        required: true
+        type: string
+      - name: field10
+        description: field1 of the contact.
         in: formData
         required: true
         type: string

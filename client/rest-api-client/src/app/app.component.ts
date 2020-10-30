@@ -60,9 +60,7 @@ export class AppComponent {
 
   }
 
-  addField() {
-    console.log('sdfsdf');
-    
+  addField() {  
     this.fields.push(this.fieldName);
     this.fieldName = '';
     console.log(this.fields);
