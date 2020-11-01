@@ -9,125 +9,197 @@
   <a class="btn btn-outline-primary" href="#">Sign up</a>
 </div>
 
-    <div class="container">
-      <div class="py-5 text-center">
+<div class="container">
+  <div class="py-5 text-center">
 
-        <h2>REST API Template Automation</h2>
-        <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form
-          group has
-          a validation state that can be triggered by attempting to submit the form without completing it.</p>
-      </div>
+    <h2>REST API Template Automation</h2>
+    <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form
+      group has
+      a validation state that can be triggered by attempting to submit the form without completing it.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 order-md-1">
 
       <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8 order-md-1">
-          <h4 class="mb-3">Customize your REST API</h4>
-          <form class="needs-validation" novalidate>
-            <div class="row">
-              <div class="col-md-5 mb-3">
-                <label for="country">Database</label>
-                <select class="custom-select d-block w-100" id="country" required>
-                  <option value="mysql">Mysql</option>
-                  <option value="mongodb">Mongo db</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please select a valid country.
-                </div>
-              </div>
+        <div class="col">
+          <h4 class="mb-3">Select Template Command Type</h4>
+
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required
+                (click)="onSelectTemplateType('angular')">
+              <label class="custom-control-label" for="credit">Angular Template</label>
             </div>
-            <div class="row">
-              <div class="col">
-                <h4 class="mb-3">Api Type</h4>
-
-                <div class="d-block my-3">
-                  <div class="custom-control custom-radio">
-                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required (click)="onSelectApiType('parent')">
-                    <label class="custom-control-label" for="credit">Parent</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required (click)="onSelectApiType('child')">
-                    <label class="custom-control-label" for="debit">Child</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required (click)="onSelectApiType('file')">
-                    <label class="custom-control-label" for="paypal">File</label>
-                  </div>
-                </div>
-              </div>
+            <div class="custom-control custom-radio">
+              <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required
+                (click)="onSelectTemplateType('restapi')">
+              <label class="custom-control-label" for="debit">Rest Api Template</label>
             </div>
-            <div class="row">
-              <div class="col-md-6 mb-3" *ngIf="parentTemplateVisibility">
-                <label for="lastName">Parent name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required [(ngModel)]="parentTemplateValue" [ngModelOptions]="{standalone: true}">
-                <div class="invalid-feedback">
-                  Valid last name is required.
-                </div>
-              </div>
-              
+          </div>
 
-
-              <div class="col-md-6 mb-3" *ngIf="childTemplateVisibility">
-                <label for="lastName">Child name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required [(ngModel)]="childTemplateValue" [ngModelOptions]="{standalone: true}">
-                <div class="invalid-feedback">
-                  Valid last name is required.
-                </div>
-              </div>
-
-              <div class="col-md-6 mb-3" *ngIf="fileTemplateVisibility">
-                <label for="lastName">File name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required [(ngModel)]="fileTemplateValue" [ngModelOptions]="{standalone: true}">
-                <div class="invalid-feedback">
-                  Valid last name is required.
-                </div>
-              </div>
+          <div class="col-md-6 mb-3" *ngIf="childTemplateVisibility">
+            <label for="lastName">Child name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required
+              [(ngModel)]="childTemplateValue" [ngModelOptions]="{standalone: true}">
+            <div class="invalid-feedback">
+              Valid last name is required.
             </div>
-            <div class="row">
-              <div class="col">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Add a field" aria-label="Recipient's username"
-                    aria-describedby="button-addon2"  [(ngModel)]="fieldName" [ngModelOptions]="{standalone: true}">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2" (click)="addField()">Add</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <h4 class="mb-3">Fields</h4>
-                <ul class="list-group">
-                  <li class="list-group-item" *ngFor="let field of fields">
-                    {{field}} <button class="btn btn-sm btn-danger" type="button" (click)="removeField(field)">Remove</button>
-                  </li>
-                 
-                </ul>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <label for="exampleFormControlTextarea1">Command to be executed</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #inputTarget [(ngModel)]="command" [ngModelOptions]="{standalone: true}"> 
-            
-          </textarea>
-              </div>
-            </div>
+          </div>
 
 
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="button" [ngxClipboard]="inputTarget">Copy command
-              to Clipboard</button>
-          </form>
         </div>
-
       </div>
 
-      <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2020-2021 CAK Consulting</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
+      <form class="needs-validation" *ngIf="angularTemplateVisibility" novalidate>
+        <h4 class="mb-3">Customize your ANGULAR API</h4>
+    
+        <div class="row">
+      
+            <label>Angular Template name</label>
+            <input type="text" class="form-control" id="angularTemplateValue" placeholder="" value="" required
+              [(ngModel)]="angularTemplateValue" [ngModelOptions]="{standalone: true}">
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+
+        </div>
+      
+
+        <div class="row">
+          <div class="col">
+            <label for="exampleFormControlTextarea1">Command to be executed</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #inputTarget [(ngModel)]="angularCommand" 
+              [ngModelOptions]="{standalone: true}" >
+          </textarea>
+          </div>
+        </div>
+
+
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="button" [ngxClipboard]="inputTarget">Copy command
+          to Clipboard</button>
+      </form>
+
+      <form class="needs-validation" *ngIf="apiTemplateVisibility" novalidate>
+        <h4 class="mb-3">Customize your REST API</h4>
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">Database</label>
+            <select class="custom-select d-block w-100" id="country" required>
+              <option value="mysql">Mysql</option>
+              <option value="mongodb">Mongo db</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid country.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h4 class="mb-3">Api Type</h4>
+
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required
+                  (click)="onSelectApiType('parent')">
+                <label class="custom-control-label" for="credit">Parent</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required
+                  (click)="onSelectApiType('child')">
+                <label class="custom-control-label" for="debit">Child</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required
+                  (click)="onSelectApiType('file')">
+                <label class="custom-control-label" for="paypal">File</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3" *ngIf="parentTemplateVisibility">
+            <label for="lastName">Angular Template ame</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required
+              [(ngModel)]="parentTemplateValue" [ngModelOptions]="{standalone: true}">
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+
+
+
+          <div class="col-md-6 mb-3" *ngIf="childTemplateVisibility">
+            <label for="lastName">Child name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required
+              [(ngModel)]="childTemplateValue" [ngModelOptions]="{standalone: true}">
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3" *ngIf="fileTemplateVisibility">
+            <label for="lastName">File name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="" required
+              [(ngModel)]="fileTemplateValue" [ngModelOptions]="{standalone: true}">
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Add a field" aria-label="Recipient's username"
+                aria-describedby="button-addon2" [(ngModel)]="fieldName" [ngModelOptions]="{standalone: true}">
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="button-addon2"
+                  (click)="addField()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h4 class="mb-3">Fields</h4>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let field of fields">
+                {{field}} <button class="btn btn-sm btn-danger" type="button"
+                  (click)="removeField(field)">Remove</button>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="exampleFormControlTextarea1">Command to be executed</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #inputTarget [(ngModel)]="command"
+              [ngModelOptions]="{standalone: true}">
+
+          </textarea>
+          </div>
+        </div>
+
+
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="button" [ngxClipboard]="inputTarget">Copy command
+          to Clipboard</button>
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2020-2021 CAK Consulting</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>

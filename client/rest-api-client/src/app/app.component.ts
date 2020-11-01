@@ -17,6 +17,9 @@ export class AppComponent {
   parentTemplateVisibility: boolean = true;
   childTemplateVisibility: boolean = false;
   fileTemplateVisibility: boolean = false;
+
+  apiTemplateVisibility: boolean = false;
+  angularTemplateVisibility: boolean = false;
    
   constructor(private fb:FormBuilder) {
    
@@ -24,37 +27,16 @@ export class AppComponent {
       quantities: this.fb.array([]) ,
     });
   }
-  
-  quantities() : FormArray {
-    return this.productForm.get("quantities") as FormArray
-  }
-   
-  newQuantity(): FormGroup {
-    return this.fb.group({
-      qty: '',
-    })
-  }
-   
-  addQuantity() {
-    this.quantities().push(this.newQuantity());
-  }
-   
-  removeQuantity(i:number) {
-    this.quantities().removeAt(i);
-  }
-   
-  onSubmit() {
-    console.log(this.productForm.value);
-  }
+ 
   
   field = '';
   options: boolean = false;
-
+  angularTemplateValue: string = "";
   parentTemplateValue: string = "";
   childTemplateValue: string = "child=false";
   fileTemplateValue: string = "file=false";
   command: string = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand;
-  
+  angularCommand: string = "node .\\app.js " + this.angularTemplateValue;
   clickEvent(val) {
     this.field = this.field + "  " + val
 
@@ -99,6 +81,19 @@ export class AppComponent {
       this.fileTemplateVisibility = true;
       this.childTemplateValue = "child=false"
       this.fileTemplateValue = "files"
+    }
+  }
+
+  onSelectTemplateType(apiType) { 
+    if (apiType === 'angular') {
+      this.apiTemplateVisibility = false;
+      this.angularTemplateVisibility = true;
+      
+   
+    }
+    else if (apiType === 'restapi') {
+      this.apiTemplateVisibility = true;
+      this.angularTemplateVisibility = false;
     }
   }
 }
