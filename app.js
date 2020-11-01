@@ -319,6 +319,14 @@ else {
     generateTemplate();
 }
 
+//parent child=false file=false
+//parent child file=false
+
+// const isChildTemplate = "child=false".split()[1]
+// if(isChildTemplate === false) 
+
+
+
 
 
 
