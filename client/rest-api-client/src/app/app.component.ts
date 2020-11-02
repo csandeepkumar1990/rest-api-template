@@ -36,7 +36,7 @@ export class AppComponent {
   childTemplateValue: string = "child=false";
   fileTemplateValue: string = "file=false";
   command: string = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand;
-  angularCommand: string = "node .\\app.js " + this.angularTemplateValue;
+  angularCommand: string = "node .\\app.js angular=true" + this.angularTemplateValue;
   clickEvent(val) {
     this.field = this.field + "  " + val
 
