@@ -46,6 +46,7 @@ export class AppComponent {
   clickEvent(val) {
     this.field = this.field + "  " + val
     console.log(this.command);
+    
 
   }
   // if(theCheckbox){

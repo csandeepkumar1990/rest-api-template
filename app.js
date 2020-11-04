@@ -15,6 +15,12 @@ var arguments2 = process.argv.slice(3);
 var isChild = process.argv.slice(3, 4);
 
 var args = process.argv.slice(3);
+console.log("args-----------------")
+if(args[args.length-1]=="clear-dist:true")
+{
+    fsExtra.emptyDirSync(distFileDir)
+}
+
 var templateName = arguments[0];
 const childtemplateName = arguments2[0];
 var childfileName = arguments[0] + "" + arguments2[0];
@@ -556,9 +562,11 @@ const generateChildMongoTemplate = async () => {
 
 }
 
+
 if (process.argv.slice(3, 4) == "angular=true") {
     generateAngularTemplate();
 }
+
 else if (isChild != "child=false") {
     generateChildTemplate();
 }
