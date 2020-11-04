@@ -85,15 +85,15 @@ const generateTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (i = 2; i < args.length; i++) {
+    for (argument = 2; argument < args.length; argument++) {
 
-        var field = "field" + i;
+        var field = "field" + argument;
         var fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
 
-        migrationFields = migrationFields + args[i] + ":string,"
+        migrationFields = migrationFields + args[argument] + ":string,"
 
         const option = {
             files: [
@@ -102,7 +102,7 @@ const generateTemplate = async () => {
             ],
             //Replacement for  fields (string or regex) 
             from: [regex],
-            to: [args[i]],
+            to: [args[argument]],
         };
 
 
@@ -172,17 +172,17 @@ const generateChildTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (i = 2; i < args.length; i++) {
-        var field = "field" + i;
+    for (argument = 2; argument < args.length; argument++) {
+        var field = "field" + argument;
         var fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
 
-        migrationFields = migrationFields + args[i] + ":string,";
+        migrationFields = migrationFields + args[argument] + ":string,";
 
-        if (i == 2 && (args[i].slice(0, -1) === 's' || args[i].slice(0, -1) === 'S')) {
-            args[i] = args[i].slice(0, -1)
+        if (argument == 2 && (args[argument].slice(0, -1) === 's' || args[argument].slice(0, -1) === 'S')) {
+            args[argument] = args[argument].slice(0, -1)
 
         }
         const option = {
@@ -192,7 +192,7 @@ const generateChildTemplate = async () => {
             ],
             //Replacement for  fields (string or regex) 
             from: [regex],
-            to: [args[i]],
+            to: [args[argument]],
         };
         await replace(option);
     }
@@ -256,15 +256,15 @@ const generateStorageTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (i = 2; i < args.length; i++) {
+    for (argument = 2; argument < args.length; argument++) {
 
-        var field = "field" + i;
+        var field = "field" + argument;
         var fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
 
-        migrationFields = migrationFields + args[i] + ":string,"
+        migrationFields = migrationFields + args[argument] + ":string,"
 
         const option = {
             files: [
@@ -272,7 +272,7 @@ const generateStorageTemplate = async () => {
             ],
             //Replacement for  fields (string or regex) 
             from: [regex],
-            to: [args[i]],
+            to: [args[argument]],
         };
 
 
@@ -324,10 +324,41 @@ const generateAngularTemplate = async () => {
         let workingDir = angulartemplateDistDir + '/' + name;
         let destinationDir = workingDir.replace(/user/g, angularTemplateName)
         await fsExtra.rename(workingDir, destinationDir);
+
+        const subfiles = await fsExtra.readdir(workingDir);
+
+        for (let subname of subfiles) {
+            let subworkingDir = destinationDir + '/' + subname
+            let subdestinationDir = subworkingDir.replace(/user/g, angularTemplateName)
+
+            await fsExtra.rename(subworkingDir, subdestinationDir);
+
+            // console.log("subfiles---------")
+            // console.log(subfiles)
+
+            console.log("subworkingDir---------")
+            console.log(subworkingDir)
+
+            console.log("subdestinationDir---------")
+            console.log(subdestinationDir)
+
+            const options = {
+                files: [
+                    subdestinationDir
+                ],
+                //Replacement to make (string or regex) 
+                from: [/user/g, /User/g],
+                to: [angularTemplateName, angularTemplateName],
+            };
+
+            await replace(options);
+
+        }
+
     };
     const options = {
         files: [
-            './angulardist/'  + '*'
+            './*' + angulardist + '*/*' + ''
         ],
         //Replacement to make (string or regex) 
         from: [/user/g, /User/g],
@@ -348,20 +379,22 @@ const generateMongoTemplate = async () => {
     await fsExtra.ensureDir(templateDistDir);
     await fsExtra.copy('./mongotemplate', templateDistDir);
 
+    templateName = templateName.slice(0, -1)
+
 
     const files = await fsExtra.readdir(templateDistDir);
     for (let name of files) {
         let workingDir = templateDistDir + '/' + name;
-        let destinationDir = workingDir.replace(/report/g, templateName)
+        let destinationDir = workingDir.replace(/user/g, templateName)
         await fsExtra.rename(workingDir, destinationDir);
     };
     const options = {
         files: [
-            './dist/' + templateName + '/*.*',
-            './dist/' + templateName + '/*.yaml'
+            './dist/' + templateName + 's/*.*',
+            './dist/' + templateName + 's/*.yaml'
         ],
         //Replacement to make (string or regex) 
-        from: [/report/g, /Report/g],
+        from: [/user/g, /User/g],
         to: [templateName, capitalTemplateName],
     };
 
@@ -370,7 +403,7 @@ const generateMongoTemplate = async () => {
             './dist/' + templateName + '/*.storage.js*',
         ],
         //Replacement to make (string or regex) 
-        from: [/report/g, /Report/g],
+        from: [/user/g, /User/g],
         to: [templateName, capitalTemplateName],
     };
 
@@ -385,24 +418,24 @@ const generateMongoTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (i = 2; i < args.length; i++) {
+    for (argument = 2; argument < args.length; argument++) {
 
-        var field = "field" + i;
+        var field = "field" + argument;
         var fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
 
-        migrationFields = migrationFields + args[i] + ":string,"
+        migrationFields = migrationFields + args[argument] + ":string,"
 
         const option = {
             files: [
-                './dist/' + templateName + '/*.*',
-                './dist/' + templateName + '/*.yaml'
+                './dist/' + templateName + 's' + '/*.*',
+                './dist/' + templateName + 's' + '/*.yaml'
             ],
             //Replacement for  fields (string or regex) 
             from: [regex],
-            to: [args[i]],
+            to: [args[argument]],
         };
 
 
@@ -419,8 +452,8 @@ const generateMongoTemplate = async () => {
 
     const dropFieldsOption = {
         files: [
-            './dist/' + templateName + '/*.*',
-            './dist/' + templateName + '/*.yaml'
+            './dist/' + templateName + 's/*.*',
+            './dist/' + templateName + 's/*.yaml'
         ],
         //Remove unused fields in files to make (string or regex) 
         from: [regexDropFields],
@@ -472,17 +505,17 @@ const generateChildMongoTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (i = 2; i < args.length; i++) {
-        var field = "field" + i;
+    for (argument = 2; argument < args.length; argument++) {
+        var field = "field" + argument;
         var fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
 
-        migrationFields = migrationFields + args[i] + ":string,";
+        migrationFields = migrationFields + args[argument] + ":string,";
 
-        if (i == 2 && (args[i].slice(0, -1) === 's' || args[i].slice(0, -1) === 'S')) {
-            args[i] = args[i].slice(0, -1)
+        if (argument == 2 && (args[argument].slice(0, -1) === 's' || args[argument].slice(0, -1) === 'S')) {
+            args[argument] = args[argument].slice(0, -1)
 
         }
         const option = {
@@ -492,7 +525,7 @@ const generateChildMongoTemplate = async () => {
             ],
             //Replacement for  fields (string or regex) 
             from: [regex],
-            to: [args[i]],
+            to: [args[argument]],
         };
         await replace(option);
     }
@@ -532,10 +565,10 @@ else if (isChild != "child=false") {
 else if (process.argv.slice(4, 5) == "file=true") {
     generateStorageTemplate();
 }
-else if ((process.argv.slice(4, 5) == "file=true-db=mongo") &&((process.argv.slice(4, 5) == "file=true-db=mongo")||(process.argv.slice(4, 5) == "file=false-db=mongo"))) {
+else if ((process.argv.slice(4, 5) == "file=true-db=mongo") && ((process.argv.slice(4, 5) == "file=true-db=mongo") || (process.argv.slice(4, 5) == "file=false-db=mongo"))) {
     generateMongoTemplate();
 }
-else if ((process.argv.slice(4, 5) == "file=true-db=mongo")&&(process.argv.slice(3, 4) != "child=false") &&((process.argv.slice(4, 5) == "file=true-db=mongo")||(process.argv.slice(4, 5) == "file=false-db=mongo")))  {
+else if ((process.argv.slice(4, 5) == "file=true-db=mongo") && (process.argv.slice(3, 4) != "child=false") && ((process.argv.slice(4, 5) == "file=true-db=mongo") || (process.argv.slice(4, 5) == "file=false-db=mongo"))) {
     generateChildMongoTemplate();
 }
 

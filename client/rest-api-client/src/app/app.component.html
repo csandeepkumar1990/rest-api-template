@@ -26,6 +26,14 @@
         <div class="col">
           <h4 class="mb-3">Select Template Command Type</h4>
 
+          <label class="container"> 
+            <input type="checkbox" [(ngModel)]="theCheckbox"  >
+                Clear dist folder <span *ngIf="marked"></span><span *ngIf="!marked"></span>
+                {{theCheckbox}}
+            
+              <span class="checkmark"></span>
+            </label>  
+
           <div class="d-block my-3">
             <div class="custom-control custom-radio">
               <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required
@@ -192,6 +200,9 @@
     </div>
 
   </div>
+
+
+
 
 
 

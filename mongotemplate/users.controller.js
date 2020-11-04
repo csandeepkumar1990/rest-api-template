@@ -1,4 +1,4 @@
-var ReportService = require('../services/reports.service');
+var UserService = require('../services/users.service');
 
 const { validationResult } = require('express-validator');
 
@@ -8,7 +8,7 @@ exports.create = async (req, res) => {
     return res.status(422).json({ errors: errors.array() });
   }
   
-  const report = {
+  const user = {
     field1: req.body.field1,
     field2: req.body.field2,
     field3: req.body.field3,
@@ -17,11 +17,11 @@ exports.create = async (req, res) => {
   };
 
   try {
-    var newReport = await ReportService.create(report);
-    res.send(newReport);
+    var newUser = await UserService.create(user);
+    res.send(newUser);
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Error occurred while creating the Report.",
+      message: err.message || "Error occurred while creating the User.",
       code: err.code || 500
     });
   }
@@ -33,11 +33,11 @@ exports.getAll = async (req, res) => {
     const page = req.query.page ? req.query.page : 1;
     const limit = req.query.limit ? req.query.limit : 10;
 
-    var report = await ReportService.getAll(page, limit);
-    res.send(report);
+    var user = await UserService.getAll(page, limit);
+    res.send(user);
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Error occurred while retrieving the report", code: err.code || 500
+      message: err.message || "Error occurred while retrieving the user", code: err.code || 500
     });
   }
 };
@@ -45,13 +45,13 @@ exports.getAll = async (req, res) => {
 exports.get = async (req, res) => {
   try {
     const query = {
-      _id: req.params.reportId
+      _id: req.params.userId
     }
-    var report = await ReportService.findOne(query);
-    res.send(report);
+    var user = await UserService.findOne(query);
+    res.send(user);
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Error occurred while finding the report", code: err.code || 500
+      message: err.message || "Error occurred while finding the user", code: err.code || 500
     });
   }
 };
@@ -62,32 +62,32 @@ exports.update = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
-  let report = {
+  let user = {
     field1: req.body.field1,
     field2: req.body.field2,
     field3: req.body.field3,
-    reportName: req.body.reportName,
+    userName: req.body.userName,
     insertedBy: req.body.insertedBy,
     updatedBy: req.body.updatedBy
   };
 
-  var keys = Object.keys(report);
+  var keys = Object.keys(user);
   for (var i = 0; i < keys.length; i++) {
-    if (!report[keys[i]]) {
-      delete report[keys[i]];
+    if (!user[keys[i]]) {
+      delete user[keys[i]];
     }
   }
 
-  const reportQuery = {
-    _id: req.params.reportId
+  const userQuery = {
+    _id: req.params.userId
   }
 
   try {
-    var updatedReport = await ReportService.update(report, reportQuery);
-    res.send(updatedReport);
+    var updatedUser = await UserService.update(user, userQuery);
+    res.send(updatedUser);
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Error occurred while updating the report.", code: err.code || 500
+      message: err.message || "Error occurred while updating the user.", code: err.code || 500
     });
   }
 };
@@ -99,11 +99,11 @@ exports.delete = async (req, res) => {
   }
 
   try {
-    var updatedReport = await ReportService.delete(req.params.reportId);
-    res.send(updatedReport);
+    var updatedUser = await UserService.delete(req.params.userId);
+    res.send(updatedUser);
   } catch (err) {
     res.status(500).send({
-      message: err.message || "Error occurred while deleting the report.", code: err.code || 500
+      message: err.message || "Error occurred while deleting the user.", code: err.code || 500
     });
   }
 };

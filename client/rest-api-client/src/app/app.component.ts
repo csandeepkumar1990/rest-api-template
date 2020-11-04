@@ -8,6 +8,8 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  marked: boolean =   false;
+  theCheckbox: boolean =   false;
   name = 'Angular';
   
   productForm: FormGroup;
@@ -37,10 +39,32 @@ export class AppComponent {
   fileTemplateValue: string = "file=false";
   command: string = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand;
   angularCommand: string = "node .\\app.js angular=true" + this.angularTemplateValue;
+  clearDistTrue: string = this.command + "clear-dist-true";
+  clearDistFalse: string = this.command + "clear-dist-false";
+  
+
   clickEvent(val) {
     this.field = this.field + "  " + val
+    console.log(this.command);
 
   }
+  // if(theCheckbox){
+  //   this.command = this.command + "clear-dist"
+
+  //   console.log(this.command);
+  // }
+  
+  // onSelectClearDist(theCheckbox){
+  //   // if(theCheckbox){
+  //   // this.command =this.clearDistTrue
+  //   // console.log(this.command);
+  //   // }
+  //   // else{
+  //   // this.command = this.command 
+  //   // console.log(this.command);
+  //   // }
+  // }
+  
 
   addField() {  
     this.fields.push(this.fieldName);
@@ -60,7 +84,7 @@ export class AppComponent {
   generateFieldCommand() {
     this.fieldCommand = this.fields.join(' ');
     console.log(this.fieldCommand);
-    this.command = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand;
+    this.command = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand +'  clear-dist:' +this.theCheckbox;
   }
 
   onSelectApiType(apiType) { 

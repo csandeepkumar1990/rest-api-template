@@ -1,13 +1,13 @@
 
-/reports:
+/users:
   post:
-    tags: ["Reports"]
-    description: create a report.
+    tags: ["User"]
+    description: create a user.
     produces:
       - application/json
     parameters:
       - name: field1
-        description: field1 of the report.
+        description: field1 of the user.
         in: formData
         required: true
         type: string  
@@ -23,53 +23,53 @@
         type: string      
     responses:
       200:
-        description: Reports
+        description: User
 
   get:
-    tags: ["Reports"]
-    description: get all reports.
+    tags: ["User"]
+    description: get all users.
     produces:
       - application/json
     parameters:
       - name: page
-        description: page of the Reports.
+        description: page of the User.
         in: query
         required: true
         type: integer
       - name: limit
-        description: limit of the Reports.
+        description: limit of the User.
         in: query
         required: true
         type: integer
     responses:
       200:
-        description: Reports      
+        description: User      
 
-/reports/{reportId}:
+/users/{userId}:
   get:
-    tags: ["Reports"]
-    description: get a report by id.
+    tags: ["User"]
+    description: get a user by id.
     produces:
       - application/json
     parameters: 
-      - name: reportId
-        description: reportId of the report.
+      - name: userId
+        description: userId of the user.
         in: path
         required: true
         type: string  
     responses:
       200:
-        description: Reports
+        description: User
 
 
   put:
-    tags: ["Reports"]
-    description: Update a report.
+    tags: ["User"]
+    description: Update a user.
     produces:
       - application/json
     parameters:  
-      - name: reportId
-        description: reportId of the report.
+      - name: userId
+        description: userId of the user.
         in: path
         required: true
         type: string
@@ -92,16 +92,16 @@
       200:   
 
   delete:
-    tags: ["Reports"]
-    description: Delete a report.
+    tags: ["User"]
+    description: Delete a user.
     produces:
       - application/json
     parameters: 
-      - name: reportId
-        description: reportId of the report.
+      - name: userId
+        description: userId of the user.
         in: path
         required: true
         type: string
     responses:
       200:
-        description: Reports  
+        description: User  

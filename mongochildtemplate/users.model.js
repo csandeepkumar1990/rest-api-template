@@ -1,7 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 
-const ReportsSchema = mongoose.Schema({
+const UsersSchema = mongoose.Schema({
     field1: { type: String, set: deleteEmpty },
     field2: { type: String, set: deleteEmpty },
     field3: { type: String, set: deleteEmpty },
@@ -18,4 +18,4 @@ function deleteEmpty(v) {
   return v;
 }
 
-module.exports = mongoose.model('Reports', ReportsSchema);
+module.exports = mongoose.model('Users', UsersSchema);
