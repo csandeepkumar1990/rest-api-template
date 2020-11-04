@@ -12,7 +12,7 @@ const fsExtra = require('fs-extra')
 
 var arguments = process.argv.slice(2, 3);
 var arguments2 = process.argv.slice(3);
-var isChild = process.argv.slice(3, 4);
+var isChildCheck = process.argv.slice(3, 4);
 
 var args = process.argv.slice(3);
 console.log("args-----------------")
@@ -37,7 +37,7 @@ var migrationFields = "";
 const { exec } = require("child_process");
 
 // remove "s" from parent-child:
-if (isChild != "child=false" && (templateName.substr(-1) == 's' || templateName.substr(-1) == "S")) {
+if (isChildCheck != "child=false" && (templateName.substr(-1) == 's' || templateName.substr(-1) == "S")) {
     templateName = templateName.slice(0, -1)
     capitalTemplateName = capitalTemplateName.slice(0, -1)
     childfileName = arguments[0].slice(0, -1) + "" + arguments2[0];
@@ -567,7 +567,7 @@ if (process.argv.slice(3, 4) == "angular=true") {
     generateAngularTemplate();
 }
 
-else if (isChild != "child=false") {
+else if (isChildCheck != "child=false") {
     generateChildTemplate();
 }
 else if (process.argv.slice(4, 5) == "file=true") {
@@ -580,7 +580,7 @@ else if ((process.argv.slice(4, 5) == "file=true-db=mongo") && (process.argv.sli
     generateChildMongoTemplate();
 }
 
-else {
+else if (isChildCheck = "child=false") {
     generateTemplate();
 }
 
