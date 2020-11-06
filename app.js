@@ -1,10 +1,12 @@
 const replace = require('replace-in-file');
+const fs = require('fs');
 
 const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 const distFileDir = './dist';
+const angularDistFileDir = './dist';
 const fsExtra = require('fs-extra')
 // fsExtra.emptyDirSync(distFileDir);
 // fsExtra.emptyDirSync('./models');
@@ -16,9 +18,10 @@ var isChildCheck = process.argv.slice(3, 4);
 
 var args = process.argv.slice(3);
 console.log("args-----------------")
-if(args[args.length-1]=="clear-dist:true")
-{
+if (args[args.length - 1] == "clear-dist:true") {
     fsExtra.emptyDirSync(distFileDir)
+    fsExtra.emptyDirSync(angularDistFileDir)
+    console.log("cleared dist")
 }
 
 var templateName = arguments[0];
@@ -46,7 +49,7 @@ if (isChildCheck != "child=false" && (templateName.substr(-1) == 's' || template
 var templateDistDir = './dist/' + templateName;
 var childtemplateDistDir = './dist/' + childfileName;
 var storagetemplateDistDir = './dist/' + templateName;
-var angulartemplateDistDir = './angulardist/' + angularTemplateName;
+var angulartemplateDistDir = './dist/' + angularTemplateName;
 
 // With a callback:
 const generateTemplate = async () => {
@@ -323,55 +326,67 @@ const generateAngularTemplate = async () => {
 
     await fsExtra.ensureDir(angulartemplateDistDir);
     await fsExtra.copy('./angular-template', angulartemplateDistDir);
-
-
     const files = await fsExtra.readdir(angulartemplateDistDir);
+
+    console.log("files---------")
+    console.log(files)
+
     for (let name of files) {
-        let workingDir = angulartemplateDistDir + '/' + name;
-        let destinationDir = workingDir.replace(/user/g, angularTemplateName)
-        await fsExtra.rename(workingDir, destinationDir);
 
-        const subfiles = await fsExtra.readdir(workingDir);
+        let isworkingDir = angulartemplateDistDir + '/' + name;
 
-        for (let subname of subfiles) {
-            let subworkingDir = destinationDir + '/' + subname
-            let subdestinationDir = subworkingDir.replace(/user/g, angularTemplateName)
+        if (fs.lstatSync(isworkingDir).isDirectory()) {
+            var workingDir = angulartemplateDistDir + '/' + name;
 
-            await fsExtra.rename(subworkingDir, subdestinationDir);
+            let destinationDir = workingDir.replace(/user/g, angularTemplateName)
 
-            // console.log("subfiles---------")
-            // console.log(subfiles)
 
-            console.log("subworkingDir---------")
-            console.log(subworkingDir)
+            await fsExtra.rename(workingDir, destinationDir);
 
-            console.log("subdestinationDir---------")
-            console.log(subdestinationDir)
+            const subfiles = await fsExtra.readdir(destinationDir);
 
+            console.log("subfiles---------")
+            console.log(subfiles)
+
+            for (let subname of subfiles) {
+                let subworkingDir = destinationDir + '/' + subname
+                let subdestinationDir = subworkingDir.replace(/user/g, angularTemplateName)
+
+                await fsExtra.rename(subworkingDir, subdestinationDir);
+                const options = {
+                    files: [
+                        subdestinationDir
+                    ],
+                    //Replacement to make (string or regex) 
+                    from: [/user/g, /User/g],
+                    to: [angularTemplateName, angularTemplateName.toString().charAt(0).toUpperCase() + angularTemplateName.toString().slice(1)],
+                };
+
+                await replace(options);
+
+            }
+
+        }
+        else{
+            let remainFile = angulartemplateDistDir + '/' + name
+            let destremainFile = remainFile.replace(/user/g, angularTemplateName)
+            console.log('****destremainFile***************************');
+            console.log(destremainFile);
+            await fsExtra.rename(remainFile, destremainFile);
             const options = {
                 files: [
-                    subdestinationDir
+                    destremainFile
                 ],
                 //Replacement to make (string or regex) 
                 from: [/user/g, /User/g],
-                to: [angularTemplateName, angularTemplateName],
+                to: [angularTemplateName, angularTemplateName.toString().charAt(0).toUpperCase() + angularTemplateName.toString().slice(1)],
             };
 
             await replace(options);
 
         }
+    }
 
-    };
-    const options = {
-        files: [
-            './*' + angulardist + '*/*' + ''
-        ],
-        //Replacement to make (string or regex) 
-        from: [/user/g, /User/g],
-        to: [angularTemplateName, angularTemplateName],
-    };
-
-    await replace(options);
 
     console.log('*******************************');
     console.log('Angular Template generated successfully');

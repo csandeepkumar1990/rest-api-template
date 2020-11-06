@@ -9,7 +9,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
 })
 export class AppComponent {
   marked: boolean =   false;
-  theCheckbox: boolean =   false;
+  clearDistCheckbox: boolean =   false;
   name = 'Angular';
   
   productForm: FormGroup;
@@ -49,14 +49,14 @@ export class AppComponent {
     
 
   }
-  // if(theCheckbox){
+  // if(clearDistCheckbox){
   //   this.command = this.command + "clear-dist"
 
   //   console.log(this.command);
   // }
   
-  // onSelectClearDist(theCheckbox){
-  //   // if(theCheckbox){
+  // onSelectClearDist(clearDistCheckbox){
+  //   // if(clearDistCheckbox){
   //   // this.command =this.clearDistTrue
   //   // console.log(this.command);
   //   // }
@@ -85,7 +85,7 @@ export class AppComponent {
   generateFieldCommand() {
     this.fieldCommand = this.fields.join(' ');
     console.log(this.fieldCommand);
-    this.command = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand +'  clear-dist:' +this.theCheckbox;
+    this.command = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand +'  clear-dist:' +this.clearDistCheckbox;
   }
 
   onSelectApiType(apiType) { 
