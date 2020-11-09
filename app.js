@@ -15,10 +15,10 @@ const fsExtra = require('fs-extra')
 var arguments = process.argv.slice(2, 3);
 var arguments2 = process.argv.slice(3);
 var isChildCheck = process.argv.slice(3, 4);
-
+var clearDistCheck = process.argv.slice(5, 6);
 var args = process.argv.slice(3);
-console.log("args-----------------")
-if (args[args.length - 1] == "clear-dist:true") {
+
+if (args[2] == "cleardist=true") {
     fsExtra.emptyDirSync(distFileDir)
     fsExtra.emptyDirSync(angularDistFileDir)
     console.log("cleared dist")
@@ -94,7 +94,7 @@ const generateTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (argument = 2; argument < args.length; argument++) {
+    for (argument = 3; argument < args.length; argument++) {
 
         var field = "field" + argument;
         var fieldString = "field";
@@ -113,10 +113,7 @@ const generateTemplate = async () => {
             from: [regex],
             to: [args[argument]],
         };
-
-
         await replace(option);
-
     }
 
     migrationFields = migrationFields + "name:string,type:string,description:string,createdBy:string,updatedBy:string"
@@ -181,7 +178,7 @@ const generateChildTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (argument = 2; argument < args.length; argument++) {
+    for (argument = 3; argument < args.length; argument++) {
         var field = "field" + argument;
         var fieldString = "field";
 
@@ -265,7 +262,7 @@ const generateStorageTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (argument = 2; argument < args.length; argument++) {
+    for (argument = 3; argument < args.length; argument++) {
 
         var field = "field" + argument;
         var fieldString = "field";
@@ -367,11 +364,9 @@ const generateAngularTemplate = async () => {
             }
 
         }
-        else{
+        else {
             let remainFile = angulartemplateDistDir + '/' + name
             let destremainFile = remainFile.replace(/user/g, angularTemplateName)
-            console.log('****destremainFile***************************');
-            console.log(destremainFile);
             await fsExtra.rename(remainFile, destremainFile);
             const options = {
                 files: [
@@ -439,7 +434,7 @@ const generateMongoTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (argument = 2; argument < args.length; argument++) {
+    for (argument = 3; argument < args.length; argument++) {
 
         var field = "field" + argument;
         var fieldString = "field";
@@ -526,7 +521,7 @@ const generateChildMongoTemplate = async () => {
 
     //Adding fields to controller and yaml
 
-    for (argument = 2; argument < args.length; argument++) {
+    for (argument = 3; argument < args.length; argument++) {
         var field = "field" + argument;
         var fieldString = "field";
 
@@ -582,12 +577,14 @@ if (process.argv.slice(3, 4) == "angular=true") {
     generateAngularTemplate();
 }
 
+else if (process.argv.slice(4, 5) != "file=false") {
+    generateStorageTemplate();
+}
+
 else if (isChildCheck != "child=false") {
     generateChildTemplate();
 }
-else if (process.argv.slice(4, 5) == "file=true") {
-    generateStorageTemplate();
-}
+
 else if ((process.argv.slice(4, 5) == "file=true-db=mongo") && ((process.argv.slice(4, 5) == "file=true-db=mongo") || (process.argv.slice(4, 5) == "file=false-db=mongo"))) {
     generateMongoTemplate();
 }

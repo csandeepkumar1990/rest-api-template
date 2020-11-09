@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
 
 
@@ -7,11 +7,11 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  marked: boolean =   false;
-  clearDistCheckbox: boolean =   false;
+export class AppComponent implements OnInit {
+  marked: boolean = false;
+  clearDistCheckbox: boolean = false;
   name = 'Angular';
-  
+
   productForm: FormGroup;
   fieldName: any = '';
   fields: any = [];
@@ -21,32 +21,41 @@ export class AppComponent {
   fileTemplateVisibility: boolean = false;
 
   apiTemplateVisibility: boolean = false;
-  angularTemplateVisibility: boolean = false;
-   
-  constructor(private fb:FormBuilder) {
-   
-    this.productForm = this.fb.group({
-      quantities: this.fb.array([]) ,
-    });
-  }
- 
-  
+  angularTemplateVisibility: boolean = true;
+
   field = '';
   options: boolean = false;
   angularTemplateValue: string = "";
   parentTemplateValue: string = "";
   childTemplateValue: string = "child=false";
   fileTemplateValue: string = "file=false";
-  command: string = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand;
-  angularCommand: string = "node .\\app.js angular=true" + this.angularTemplateValue;
+  command: string = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' + this.fileTemplateValue + ' ' + this.fieldCommand;
+  angularCommand: string = "node .\\app.js " + this.angularTemplateValue + " angular=true";
   clearDistTrue: string = this.command + "clear-dist-true";
   clearDistFalse: string = this.command + "clear-dist-false";
-  
+  selectedTemplateType: string = "angular";
+
+  constructor(private fb: FormBuilder) {
+    this.productForm = this.fb.group({
+      quantities: this.fb.array([]),
+    });
+  }
+
+  ngOnInit() {
+    console.log("component has been initialized!")
+    this.command = "node .\\app.js " + this.angularTemplateValue + " angular=true" + ' cleardist=' + this.clearDistCheckbox;
+  }
+
+
+ 
+
+
+
 
   clickEvent(val) {
     this.field = this.field + "  " + val
     console.log(this.command);
-    
+
 
   }
   // if(clearDistCheckbox){
@@ -54,7 +63,7 @@ export class AppComponent {
 
   //   console.log(this.command);
   // }
-  
+
   // onSelectClearDist(clearDistCheckbox){
   //   // if(clearDistCheckbox){
   //   // this.command =this.clearDistTrue
@@ -65,9 +74,9 @@ export class AppComponent {
   //   // console.log(this.command);
   //   // }
   // }
-  
 
-  addField() {  
+
+  addField() {
     this.fields.push(this.fieldName);
     this.fieldName = '';
     console.log(this.fields);
@@ -77,48 +86,71 @@ export class AppComponent {
   removeField(fieldName) {
     const index: number = this.fields.indexOf(fieldName);
     if (index !== -1) {
-        this.fields.splice(index, 1);
-    } 
-    this.generateFieldCommand(); 
+      this.fields.splice(index, 1);
+    }
+    this.generateFieldCommand();
   }
 
   generateFieldCommand() {
     this.fieldCommand = this.fields.join(' ');
     console.log(this.fieldCommand);
-    this.command = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' +  this.fileTemplateValue + ' ' +  this.fieldCommand +'  clear-dist:' +this.clearDistCheckbox;
+    this.command = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' + this.fileTemplateValue + ' cleardist=' + this.clearDistCheckbox +' ' + this.fieldCommand ;
   }
 
-  onSelectApiType(apiType) { 
+  onSelectApiType(apiType) {
     if (apiType === 'parent') {
+      console.log("in api type")
+      this.parentTemplateVisibility = true;
       this.childTemplateVisibility = false;
       this.fileTemplateVisibility = false;
       this.childTemplateValue = "child=false"
       this.fileTemplateValue = "file=false"
     }
     else if (apiType === 'child') {
+      console.log("in child type")
+      this.parentTemplateVisibility = true;
       this.childTemplateVisibility = true;
       this.fileTemplateVisibility = false;
       this.childTemplateValue = ""
       this.fileTemplateValue = "file=false"
     }
     else if (apiType === 'file') {
+      console.log("in file type")
+      this.parentTemplateVisibility = false;
       this.childTemplateVisibility = false;
       this.fileTemplateVisibility = true;
       this.childTemplateValue = "child=false"
+      this.parentTemplateValue = ""
       this.fileTemplateValue = "files"
     }
   }
 
-  onSelectTemplateType(apiType) { 
-    if (apiType === 'angular') {
+  onSelectTemplateType(templateType) {
+    if (templateType === 'angular') {
       this.apiTemplateVisibility = false;
       this.angularTemplateVisibility = true;
-      
-   
+      this.command = "node .\\app.js " + this.angularTemplateValue + " angular=true";
     }
-    else if (apiType === 'restapi') {
+    else if (templateType === 'restapi') {
       this.apiTemplateVisibility = true;
       this.angularTemplateVisibility = false;
+      this.command = "node .\\app.js " + this.parentTemplateValue + ' ' + this.childTemplateValue + ' ' + this.fileTemplateValue + ' ' + this.fieldCommand;
+    }
+    this.selectedTemplateType = templateType;
+  }
+
+  onAngularTemplateValueChange(newAngularTemplateValue) {
+    this.angularTemplateValue = newAngularTemplateValue;
+    this.command = "node .\\app.js " + this.angularTemplateValue + " angular=true";
+  }
+  
+  onClearDistValueChannge(newDistValue) {
+    this.clearDistCheckbox = newDistValue;
+    if (this.selectedTemplateType === 'angular') {
+      this.command = "node .\\app.js " + this.angularTemplateValue + " angular=true" + ' cleardist=' + this.clearDistCheckbox;
+    }
+    else if (this.selectedTemplateType === 'restapi') {
+      this.generateFieldCommand();
     }
   }
 }

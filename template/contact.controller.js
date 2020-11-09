@@ -9,14 +9,14 @@ exports.create = async (req, res) => {
   }
 
   const contact = {
-    field1: req.body.field1,
-    field2: req.body.field2,
     field3: req.body.field3,
     field4: req.body.field4,
     field5: req.body.field5,
     field6: req.body.field6,
     field7: req.body.field7,
     field8: req.body.field8,
+    field9: req.body.field9,
+    field10: req.body.field10,
     createdBy: req.body.createdBy
   };
 
@@ -81,14 +81,14 @@ exports.update = async (req, res) => {
 
   try {
     const contact = {
-      field1: req.body.field1,
-      field2: req.body.field2,
       field3: req.body.field3,
       field4: req.body.field4,
       field5: req.body.field5,
       field6: req.body.field6,
       field7: req.body.field7,
       field8: req.body.field8,
+      field9: req.body.field9,
+      field10: req.body.field10,
       updatedBy: req.body.updatedBy
     }
 
