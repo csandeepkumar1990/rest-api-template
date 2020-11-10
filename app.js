@@ -25,6 +25,7 @@ if (args[2] == "cleardist=true") {
 }
 
 var templateName = arguments[0];
+var storageFileName = arguments2[0];
 const childtemplateName = arguments2[0];
 var childfileName = arguments[0] + "" + arguments2[0];
 
@@ -33,6 +34,9 @@ var angularTemplateName = process.argv.slice(2, 3);
 var capitalTemplateName = capitalizeFirstLetter(templateName);
 const capitalChildTemplateName = capitalizeFirstLetter(childtemplateName);
 console.log("Generating REST Template for : " + templateName);
+
+console.log("storageFileName--------")
+console.log(storageFileName)
 
 
 var migrationFields = "";
@@ -48,7 +52,7 @@ if (isChildCheck != "child=false" && (templateName.substr(-1) == 's' || template
 }
 var templateDistDir = './dist/' + templateName;
 var childtemplateDistDir = './dist/' + childfileName;
-var storagetemplateDistDir = './dist/' + templateName;
+var storagetemplateDistDir = './dist/' + storageFileName;
 var angulartemplateDistDir = './dist/' + angularTemplateName;
 
 // With a callback:
@@ -239,23 +243,22 @@ const generateStorageTemplate = async () => {
     await fsExtra.ensureDir(storagetemplateDistDir);
     await fsExtra.copy('./storagetemplate', storagetemplateDistDir);
 
-
     const files = await fsExtra.readdir(storagetemplateDistDir);
-    for (let name of files) {
-        let workingDir = storagetemplateDistDir + '/' + name;
-        let destinationDir = workingDir.replace(/contact/g, templateName)
+       
+    console.log("storagetemplateDistDir--")
+    console.log(storagetemplateDistDir)
+
+        let workingDir = storagetemplateDistDir + '/' + storageFileName;
+        let destinationDir = workingDir.replace(/contact/g, storageFileName)
         await fsExtra.rename(workingDir, destinationDir);
-    };
-
-
 
     const options = {
         files: [
-            './dist/' + templateName + '/*.*'
+            './dist/' + storageFileName + '/*.*'
         ],
         //Replacement to make (string or regex) 
         from: [/contact/g, /Contact/g],
-        to: [templateName, capitalTemplateName],
+        to: [storageFileName, capitalTemplateName],
     };
 
     await replace(options);
@@ -302,7 +305,6 @@ const generateStorageTemplate = async () => {
         to: [''],
     };
     await replace(dropFieldsOption);
-
 
     //migration file command
     await exec("sequelize init");

@@ -117,36 +117,37 @@
       - name: field1
         description: field1 of the ContactActivity.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field2
         description: field2 of the ContactActivity.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field3
         description: field3 of the ContactActivity.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field4
         description: field4 of the ContactActivity.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field5
         description: field5 of the ContactActivity.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field6
         description: field6 of the ContactActivity.
         in: formData
-        required: true
+        required: false
         type: string
      
     responses:
-      200:   
+      200:
+        description: Contact Activity   
 
 
   delete:
