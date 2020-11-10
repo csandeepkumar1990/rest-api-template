@@ -1,0 +1,107 @@
+/deals/{dealId}/files:
+  post:
+    tags: ["Deal Files"]
+    description: create Deal File  
+    produces:
+      - application/json
+    parameters:
+      - name: dealId
+        description: dealId of the deal.
+        in: path
+        required: true
+        type: string
+      - name: dealFile
+        description: upload a dealFile in pdf format.
+        in: formData
+        required: true
+        type: file    
+    responses:
+      200:
+        description: Deal File
+
+
+  get:
+    tags: ["Deal Files"]
+    description: Deal File
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the Deal File.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the Deal File.
+        in: query
+        required: true
+        type: integer
+      - name: dealId
+        description: dealid of the deal.
+        in: path
+        required: true
+        type: string
+    responses:
+      200:
+        description: Deal File      
+        
+/deals/{dealId}/files/{dealFileId}:
+  get:
+    tags: ["Deal Files"]
+    description: Deal File
+    produces:
+      - application/json
+    parameters:
+      - name: dealId
+        description: dealId of the deal.
+        in: path
+        required: true
+        type: string  
+      - name: dealFileId
+        description: dealFileId of the file.
+        in: path
+        required: true
+        type: string  
+    responses:
+      200:
+        description: Deal File        
+
+  put:
+    tags: ["Deal Files"]
+    description: Update a Deal File
+    produces:
+      - application/json
+    parameters:
+      - name: dealId
+        description: dealId of the deal.
+        in: path
+        required: true
+        type: string
+      - name: dealFileId
+        description: dealFileId of the file.
+        in: path
+        required: true
+        type: string  
+    responses:
+      200:   
+        description: Deal File   
+
+  delete:
+    tags: ["Deal Files"]
+    description: Delete a file
+    produces:
+      - application/json
+    parameters:
+      - name: dealId
+        description: dealid of the deal.
+        in: path
+        required: true
+        type: string  
+      - name: dealFileId
+        description: dealFileId of the file.
+        in: path
+        required: true
+        type: string
+    responses:
+      200:
+        description: Deal File          

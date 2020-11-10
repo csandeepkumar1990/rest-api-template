@@ -15,6 +15,7 @@ const fsExtra = require('fs-extra')
 var arguments = process.argv.slice(2, 3);
 var arguments2 = process.argv.slice(3);
 var isChildCheck = process.argv.slice(3, 4);
+var fileCheck = process.argv.slice(4, 5);
 var clearDistCheck = process.argv.slice(5, 6);
 var args = process.argv.slice(3);
 
@@ -25,19 +26,17 @@ if (args[2] == "cleardist=true") {
 }
 
 var templateName = arguments[0];
-var storageFileName = arguments2[0];
 const childtemplateName = arguments2[0];
+const storageTemplateName = arguments2[1];
 var childfileName = arguments[0] + "" + arguments2[0];
+var storageFileName = arguments[0] + "" + arguments2[1];
 
 var angularTemplateName = process.argv.slice(2, 3);
 
 var capitalTemplateName = capitalizeFirstLetter(templateName);
 const capitalChildTemplateName = capitalizeFirstLetter(childtemplateName);
+const capitalStorageTemplateName = capitalizeFirstLetter(storageTemplateName);
 console.log("Generating REST Template for : " + templateName);
-
-console.log("storageFileName--------")
-console.log(storageFileName)
-
 
 var migrationFields = "";
 
@@ -50,6 +49,13 @@ if (isChildCheck != "child=false" && (templateName.substr(-1) == 's' || template
     childfileName = arguments[0].slice(0, -1) + "" + arguments2[0];
     var childtemplateDistDir = './dist/' + childfileName;
 }
+if (fileCheck != "file=false" && (templateName.substr(-1) == 's' || templateName.substr(-1) == "S")) {
+    templateName = templateName.slice(0, -1)
+    capitalTemplateName = capitalTemplateName.slice(0, -1)
+    storageFileName = arguments[0].slice(0, -1) + "" + arguments2[1];
+    var storagetemplateDistDir = './dist/' + storageFileName;
+}
+
 var templateDistDir = './dist/' + templateName;
 var childtemplateDistDir = './dist/' + childfileName;
 var storagetemplateDistDir = './dist/' + storageFileName;
@@ -120,7 +126,7 @@ const generateTemplate = async () => {
         await replace(option);
     }
 
-    migrationFields = migrationFields + "name:string,type:string,description:string,createdBy:string,updatedBy:string"
+    migrationFields = migrationFields + "name:string,type:string,description:string,insertedBy:string,updatedBy:string"
 
     //removing unused fields
 
@@ -206,7 +212,7 @@ const generateChildTemplate = async () => {
         };
         await replace(option);
     }
-    migrationFields = migrationFields + "name:string,type:string,description:string,createdBy:string,updatedBy:string"
+    migrationFields = migrationFields + "name:string,type:string,description:string,insertedBy:string,updatedBy:string"
 
     //Remove unused fields
     var dropFieldsExpression = `.*${fieldString}.*`
@@ -233,32 +239,34 @@ const generateChildTemplate = async () => {
 
 }
 
-
-// With a callback:
-
-// Storage Template creation:
+///storageTemplate
 
 const generateStorageTemplate = async () => {
-
     await fsExtra.ensureDir(storagetemplateDistDir);
     await fsExtra.copy('./storagetemplate', storagetemplateDistDir);
 
-    const files = await fsExtra.readdir(storagetemplateDistDir);
-       
-    console.log("storagetemplateDistDir--")
-    console.log(storagetemplateDistDir)
 
-        let workingDir = storagetemplateDistDir + '/' + storageFileName;
-        let destinationDir = workingDir.replace(/contact/g, storageFileName)
+    const files = await fsExtra.readdir(storagetemplateDistDir);
+    for (let name of files) {
+        console.log(name);
+        let workingDir = storagetemplateDistDir + '/' + name;
+        let destinationDir = workingDir.replace(/dealfile/g, storageFileName)
+        console.log("workingDir-----------");
+        console.log(workingDir);
+        console.log("destinationDir--------------");
+        console.log(destinationDir);
         await fsExtra.rename(workingDir, destinationDir);
+    };
+
 
     const options = {
         files: [
-            './dist/' + storageFileName + '/*.*'
+            './dist/' + storageFileName + '/*.*',
+            './dist/' + storageFileName + '/*.yaml'
         ],
         //Replacement to make (string or regex) 
-        from: [/contact/g, /Contact/g],
-        to: [storageFileName, capitalTemplateName],
+        from: [/deal/g, /Deal/g, /file/g, /File/g],
+        to: [templateName, capitalTemplateName, storageTemplateName.slice(0, -1), capitalStorageTemplateName.slice(0, -1)],
     };
 
     await replace(options);
@@ -266,41 +274,41 @@ const generateStorageTemplate = async () => {
     //Adding fields to controller and yaml
 
     for (argument = 3; argument < args.length; argument++) {
-
         var field = "field" + argument;
         var fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
 
-        migrationFields = migrationFields + args[argument] + ":string,"
+        migrationFields = migrationFields + args[argument] + ":string,";
 
+        if (argument == 2 && (args[argument].slice(0, -1) === 's' || args[argument].slice(0, -1) === 'S')) {
+            args[argument] = args[argument].slice(0, -1)
+
+        }
         const option = {
             files: [
-                './dist/' + templateName + '/*.*'
+                './dist/' + storageFileName + '/*.*',
+                './dist/' + storageFileName + '/*.yaml'
             ],
             //Replacement for  fields (string or regex) 
             from: [regex],
             to: [args[argument]],
         };
-
-
         await replace(option);
-
     }
+    migrationFields = migrationFields + "name:string,type:string,description:string,insertedBy:string,updatedBy:string"
 
-    migrationFields = migrationFields + "name:string,type:string,description:string,createdBy:string,updatedBy:string"
-
-    //removing unused fields
-
+    //Remove unused fields
     var dropFieldsExpression = `.*${fieldString}.*`
     var regexDropFields = new RegExp(dropFieldsExpression, 'g')
 
     const dropFieldsOption = {
         files: [
-            './dist/' + templateName + '/*.*'
+            './dist/' + storageFileName + '/*.*',
+            './dist/' + storageFileName + '/*.yaml'
         ],
-        //Remove unused fields in files to make (string or regex) 
+        //Remove unused fields to make (string or regex) 
         from: [regexDropFields],
         to: [''],
     };
@@ -308,14 +316,98 @@ const generateStorageTemplate = async () => {
 
     //migration file command
     await exec("sequelize init");
-    await exec("sequelize model:generate --name " + capitalTemplateName + " --attributes  " + migrationFields);
-
+    await exec("sequelize model:generate --name " + storageFileName + " --attributes  " + migrationFields)
 
     console.log('*******************************');
     console.log('Storage Template generated successfully');
     console.log('*******************************');
 
 }
+
+
+
+// With a callback:
+
+// Storage Template creation:
+
+// const generateStorageTemplate = async () => {
+
+//     await fsExtra.ensureDir(storagetemplateDistDir);
+//     await fsExtra.copy('./storagetemplate', storagetemplateDistDir);
+
+//     const files = await fsExtra.readdir(storagetemplateDistDir);
+       
+//     console.log("storagetemplateDistDir--")
+//     console.log(storagetemplateDistDir)
+
+//         let workingDir = storagetemplateDistDir + '/' + storageFileName;
+//         let destinationDir = workingDir.replace(/contact/g, storageFileName)
+//         await fsExtra.rename(workingDir, destinationDir);
+
+//     const options = {
+//         files: [
+//             './dist/' + storageFileName + '/*.*'
+//         ],
+//         //Replacement to make (string or regex) 
+//         from: [/contact/g, /Contact/g],
+//         to: [storageFileName, capitalTemplateName],
+//     };
+
+//     await replace(options);
+
+//     //Adding fields to controller and yaml
+
+//     for (argument = 3; argument < args.length; argument++) {
+
+//         var field = "field" + argument;
+//         var fieldString = "field";
+
+//         var expression = `${field}`
+//         var regex = new RegExp(expression, 'g')
+
+//         migrationFields = migrationFields + args[argument] + ":string,"
+
+//         const option = {
+//             files: [
+//                 './dist/' + templateName + '/*.*'
+//             ],
+//             //Replacement for  fields (string or regex) 
+//             from: [regex],
+//             to: [args[argument]],
+//         };
+
+
+//         await replace(option);
+
+//     }
+
+//     migrationFields = migrationFields + "name:string,type:string,description:string,insertedBy:string,updatedBy:string"
+
+//     //removing unused fields
+
+//     var dropFieldsExpression = `.*${fieldString}.*`
+//     var regexDropFields = new RegExp(dropFieldsExpression, 'g')
+
+//     const dropFieldsOption = {
+//         files: [
+//             './dist/' + templateName + '/*.*'
+//         ],
+//         //Remove unused fields in files to make (string or regex) 
+//         from: [regexDropFields],
+//         to: [''],
+//     };
+//     await replace(dropFieldsOption);
+
+//     //migration file command
+//     await exec("sequelize init");
+//     await exec("sequelize model:generate --name " + capitalTemplateName + " --attributes  " + migrationFields);
+
+
+//     console.log('*******************************');
+//     console.log('Storage Template generated successfully');
+//     console.log('*******************************');
+
+// }
 
 
 // With a callback:
@@ -461,7 +553,7 @@ const generateMongoTemplate = async () => {
 
     }
 
-    migrationFields = migrationFields + "name:string,type:string,description:string,createdBy:string,updatedBy:string"
+    migrationFields = migrationFields + "name:string,type:string,description:string,insertedBy:string,updatedBy:string"
 
     //removing unused fields
 
@@ -503,7 +595,9 @@ const generateChildMongoTemplate = async () => {
         console.log(name);
         let workingDir = childtemplateDistDir + '/' + name;
         let destinationDir = workingDir.replace(/contactactivity/g, childfileName)
+        console.log("workingDir-----------");
         console.log(workingDir);
+        console.log("destinationDir--------------");
         console.log(destinationDir);
         await fsExtra.rename(workingDir, destinationDir);
     };
@@ -547,7 +641,7 @@ const generateChildMongoTemplate = async () => {
         };
         await replace(option);
     }
-    migrationFields = migrationFields + "name:string,type:string,description:string,createdBy:string,updatedBy:string"
+    migrationFields = migrationFields + "name:string,type:string,description:string,insertedBy:string,updatedBy:string"
 
     //Remove unused fields
     var dropFieldsExpression = `.*${fieldString}.*`
@@ -603,6 +697,10 @@ else if (isChildCheck = "child=false") {
 
 // const isChildTemplate = "child=false".split()[1]
 // if(isChildTemplate === false) 
+
+console.log('process.argv.slice(4, 5)')
+console.log("process.argv.slice(4, 5)------------")
+console.log(process.argv.slice(4, 5))
 
 
 

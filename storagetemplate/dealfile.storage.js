@@ -1,11 +1,11 @@
-const ContactService = require('../services/contactfiles.service');
+const DealService = require('../services/dealfiles.service');
 const path = require('path');
 const crypto = require('crypto');
 const fs = require('fs-extra');
 
 const PATH_SEPARATOR = '/';
-//const CONTACTFILE_DIR = process.env.TEMP_DIR + PATH_SEPARATOR + 'contactfile'
-const CONTACTFILE_DIR = './public/files' + PATH_SEPARATOR + 'contactfile'
+//const CONTACTFILE_DIR = process.env.TEMP_DIR + PATH_SEPARATOR + 'dealfile'
+const CONTACTFILE_DIR = './public/files' + PATH_SEPARATOR + 'dealfile'
 console.log(CONTACTFILE_DIR);
 const graphicsMagik = require('gm');
 const _makeDirIfNotExists = (dir) => {
@@ -16,7 +16,7 @@ const _makeDirIfNotExists = (dir) => {
     }
 };
 
-const _createDynamicContactFileDir = (id) => {
+const _createDynamicDealFileDir = (id) => {
     _makeDirIfNotExists(CONTACTFILE_DIR);
     //make folder for the material and upload images
     let dir = CONTACTFILE_DIR + PATH_SEPARATOR + id + PATH_SEPARATOR;
@@ -28,18 +28,17 @@ const _createUniqueFileName = (file) => {
     return crypto.randomBytes(10).toString('hex') + '_' + Date.now() + path.extname(file.name);
 }
 
-const _saveFile = (file, fieldName, contactFileId, contactId, fileId, fileDir, fileName) => {
+const _saveFile = (file, fieldName, dealFileId, dealId, fileDir, fileName) => {
 
     return new Promise((resolve, reject) => {
         const fullPath = fileDir + fileName;
         file.mv(fullPath, async function (err) {
             if (err)
-                reject(new Error('Error occurred while uploading the contact file: ' + err.message));
+                reject(new Error('Error occurred while uploading the deal file: ' + err.message));
 
-            const contactFile = {
+            const dealFile = {
                 fieldName: fieldName,
-                contactId: contactId,
-                fileId: fileId,
+                dealId: dealId,
                 originalName: file.name,
                 encoding: file.encoding,
                 mimeType: file.mimetype,
@@ -53,17 +52,17 @@ const _saveFile = (file, fieldName, contactFileId, contactId, fileId, fileDir, f
 
             const query = {
                 where: {
-                    id: contactFileId
+                    id: dealFileId
                 }
             }
-            const result = await ContactService.update(contactFile, query);
+            const result = await DealService.update(dealFile, query);
             resolve(result);
         });
     });
 }
 
 
-const _saveThumbPath = async (contactFileId, fileDir, fileName, file) => {
+const _saveThumbPath = async (dealFileId, fileDir, fileName, file) => {
     try {
         const thumbFilePath = fileDir + "thumbFile.jpg";
         const fullPath = fileDir + fileName;
@@ -75,44 +74,42 @@ const _saveThumbPath = async (contactFileId, fileDir, fileName, file) => {
             .write(thumbFilePath, function (error) {
                 // Callback function executed when finished
                 if (!error) {
-                    console.log("Finished saving JPG");
                 } else {
-                    console.log("There was an error!", error);
                 }
             });
-        const contactFile = {
+        const dealFile = {
             thumbPath: thumbFilePath.replace('.', '')
         }
         const query = {
             where: {
-                id: contactFileId
+                id: dealFileId
             }
         }
-        await ContactService.update(contactFile, query);
+        await DealService.update(dealFile, query);
     } catch (error) {
         console.log(error);
     }
 }
 
-exports.storeFile = async (file, fieldName, contactFileId, contactId, fileId) => {
-    const fileDir = _createDynamicContactFileDir(contactFileId);
+exports.storeFile = async (file, fieldName, dealFileId, dealId) => {
+    const fileDir = _createDynamicDealFileDir(dealFileId);
     const fileName = _createUniqueFileName(file);
 
     try {
-        const contactFileSavedFile = await _saveFile(file, fieldName, contactFileId, contactId, fileId, fileDir, fileName);
-        await _saveThumbPath(contactFileSavedFile.id, fileDir, fileName, file);
+        const dealFileSavedFile = await _saveFile(file, fieldName, dealFileId, dealId, fileDir, fileName);
+        await _saveThumbPath(dealFileSavedFile.id, fileDir, fileName, file);
     } catch (err) {
         console.log(err);
     }
 }
 
 
-exports.storeFiles = async (file, fieldName, contactFileId, contactId, fileId) => {
-    await Promise.all(files.contactFile.map((file) => {
+exports.storeFiles = async (file, fieldName, dealFileId, dealId) => {
+    await Promise.all(files.dealFile.map((file) => {
         return new Promise(async (resolve) => {
-            const fileDir = _createDynamicContactFileDir(contactFileId);
+            const fileDir = _createDynamicDealFileDir(dealFileId);
             const fileName = _createUniqueFileName(file);
-            await _saveFile(file, fieldName, contactFileId, contactId, fileId, fileDir, fileName);
+            await _saveFile(file, fieldName, dealFileId, dealId, fileDir, fileName);
             resolve();
         });
     }));
