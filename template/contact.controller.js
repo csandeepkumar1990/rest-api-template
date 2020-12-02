@@ -23,12 +23,12 @@ exports.create = async (req, res) => {
   try {
     const query = {
       where: {
-        name: req.body.name
+        whereFieldParam: req.body.whereFieldParam
       }
     }
     const foundContact = await ContactService.get(query);
     if (foundContact)
-      throw ({ message: "Contact found for the given contact name: " + query.where.name, code: 500 });
+      throw ({ message: "Contact found for the given contact whereFieldParam: " + query.where.whereFieldParam, code: 500 });
     var newContact = await ContactService.create(contact);
     res.send(newContact);
   } catch (err) {
@@ -63,7 +63,7 @@ exports.get = async (req, res) => {
     }
     var contact = await ContactService.get(query);
     if (!contact)
-      throw ({ message: "Contact found for the given contact id: " + query.where.id, code: 404 });
+      throw ({ message: "Contact not found for the given contact id: " + query.where.id, code: 404 });
     res.send(contact);
   } catch (err) {
     res.status(500).send({
@@ -128,7 +128,7 @@ exports.delete = async (req, res) => {
     if (updatedContact === 1) {
       res.status(200).send({ message: "delete success for contact id: " + query.where.id, code: 200 });
     } else {
-      res.status(200).send({ message: "not found for contact id: " + query.where.id, code: 200 });
+      res.status(200).send({ message: "contact not found for id: " + query.where.id, code: 200 });
     }
   } catch (err) {
     res.status(500).send({

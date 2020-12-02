@@ -1,17 +1,23 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Bomannexures', {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      annexureType: {
+      userName: {
         type: Sequelize.STRING
       },
-      bomId: {
+      firstName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
+      email: {
         type: Sequelize.STRING
       },
       name: {
@@ -23,7 +29,7 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      createdBy: {
+      insertedBy: {
         type: Sequelize.STRING
       },
       updatedBy: {
@@ -40,6 +46,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Bomannexures');
+    await queryInterface.dropTable('Users');
   }
 };

@@ -80,7 +80,7 @@ const generateTemplate = async () => {
             './dist/' + templateName + '/*.yaml'
         ],
         //Replacement to make (string or regex) 
-        from: [/contact/g, /Contact/g],
+        from: [/contact/g, /Contact/g,],
         to: [templateName, capitalTemplateName],
     };
 
@@ -120,8 +120,8 @@ const generateTemplate = async () => {
                 './dist/' + templateName + '/*.yaml'
             ],
             //Replacement for  fields (string or regex) 
-            from: [regex],
-            to: [args[argument]],
+            from: [regex,/whereFieldParam/g],
+            to: [args[argument],args[3]],
         };
         await replace(option);
     }

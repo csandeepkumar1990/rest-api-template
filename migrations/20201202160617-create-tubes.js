@@ -1,17 +1,14 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('boxsimages', {
+    await queryInterface.createTable('Tubes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      boxtype: {
-        type: Sequelize.STRING
-      },
-      contact: {
+      code: {
         type: Sequelize.STRING
       },
       name: {
@@ -40,6 +37,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('boxsimages');
+    await queryInterface.dropTable('Tubes');
   }
 };

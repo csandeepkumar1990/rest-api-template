@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Boqannexures extends Model {
+  class Scanstubes extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,17 +13,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Boqannexures.init({
-    annexureType: DataTypes.STRING,
-    boqId: DataTypes.STRING,
+  Scanstubes.init({
+    scanId: DataTypes.STRING,
+    tubeId: DataTypes.STRING,
+    position: DataTypes.STRING,
     name: DataTypes.STRING,
     type: DataTypes.STRING,
     description: DataTypes.STRING,
-    createdBy: DataTypes.STRING,
+    insertedBy: DataTypes.STRING,
     updatedBy: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Boqannexures',
+    modelName: 'Scanstubes',
   });
-  return Boqannexures;
+  return Scanstubes;
 };

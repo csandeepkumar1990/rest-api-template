@@ -1,17 +1,20 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('boximages', {
+    await queryInterface.createTable('Samples', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      boxtype: {
+      orgunitId: {
         type: Sequelize.STRING
       },
-      contact: {
+      tubeId: {
+        type: Sequelize.STRING
+      },
+      tubeSterillized: {
         type: Sequelize.STRING
       },
       name: {
@@ -40,6 +43,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('boximages');
+    await queryInterface.dropTable('Samples');
   }
 };

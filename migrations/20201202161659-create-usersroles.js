@@ -1,17 +1,17 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('dromboms', {
+    await queryInterface.createTable('Usersroles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      boxtype: {
+      userId: {
         type: Sequelize.STRING
       },
-      contact: {
+      roleId: {
         type: Sequelize.STRING
       },
       name: {
@@ -40,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('dromboms');
+    await queryInterface.dropTable('Usersroles');
   }
 };

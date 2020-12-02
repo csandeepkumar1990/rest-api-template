@@ -1,17 +1,14 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('boxchild=falses', {
+    await queryInterface.createTable('Roles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      boxtype: {
-        type: Sequelize.STRING
-      },
-      contact: {
+      role: {
         type: Sequelize.STRING
       },
       name: {
@@ -40,6 +37,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('boxchild=falses');
+    await queryInterface.dropTable('Roles');
   }
 };

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class boxchild = false extends Model {
+  class Plates extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,9 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  boxchild = false.init({
-    boxtype: DataTypes.STRING,
-    contact: DataTypes.STRING,
+  Plates.init({
+    code: DataTypes.STRING,
+    name: DataTypes.STRING,
+    comment: DataTypes.STRING,
     name: DataTypes.STRING,
     type: DataTypes.STRING,
     description: DataTypes.STRING,
@@ -23,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     updatedBy: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'boxchild=false',
+    modelName: 'Plates',
   });
-  return boxchild = false;
+  return Plates;
 };

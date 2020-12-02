@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Bomannexures extends Model {
+  class Roles extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,17 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Bomannexures.init({
-    annexureType: DataTypes.STRING,
-    bomId: DataTypes.STRING,
+  Roles.init({
+    role: DataTypes.STRING,
     name: DataTypes.STRING,
     type: DataTypes.STRING,
     description: DataTypes.STRING,
-    createdBy: DataTypes.STRING,
+    insertedBy: DataTypes.STRING,
     updatedBy: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Bomannexures',
+    modelName: 'Roles',
   });
-  return Bomannexures;
+  return Roles;
 };
