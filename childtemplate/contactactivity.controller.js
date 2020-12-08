@@ -10,7 +10,6 @@ exports.create = async (req, res) => {
 
   const contactActivity = {
     contactId: req.params.contactId,
-    activityId: req.params.activityId,
     field1: req.body.field1,
     field2: req.body.field2,
     field3: req.body.field3,
@@ -52,12 +51,12 @@ exports.get = async (req, res) => {
     const query = {
       where: {
         contactId: req.params.contactId,
-        activityId: req.params.activityId
+        id: req.params.activityId
       }
     }
     var contact = await ContactActivityService.get(query);
     if (!contact)
-      throw ({ message: "Contact found for the given contact id: " + query.where.id, code: 500 });
+      throw ({ message: "Contact not found for the given contactId : " + req.params.contactId + " activityId : " + req.params.activityId, code: 500 });
     var contactActivity = await ContactActivityService.get(query);
     res.send(contactActivity);
   } catch (err) {
@@ -88,11 +87,20 @@ exports.update = async (req, res) => {
   const query = {
     where: {
       contactId: req.params.contactId,
-      activityId: req.params.activityId
+      id: req.params.activityId
     }
   }
 
   try {
+    const query = {
+      where: {
+        contactId: req.params.contactId,
+        id: req.params.activityId
+      }
+    }
+    var contact = await ContactActivityService.get(query);
+    if (!contact)
+    throw ({ message: "Contact Activitys not found for the given contactId : " + query.where.contactId + " activityId : " + query.where.activityId, code: 500 });
     var updateContactActivity = await ContactActivityService.update(contactActivity, query);
     res.send(updateContactActivity);
   } catch (err) {
@@ -108,12 +116,19 @@ exports.delete = async (req, res) => {
     return res.status(422).json({ errors: errors.array() });
   }
 
+  const query = {
+    where: {
+        contactId: req.params.contactId,
+        id: req.params.activityId
+    }
+}
+
   try {
-    var updatedContactActivity = await ContactActivityService.delete(req.params.contactId, req.params.activityId);
+    var updatedContactActivity = await ContactActivityService.delete(query);
     if (updatedContactActivity === 1) {
       res.status(200).send({ message: "delete success for Contact Activityid: " + req.params.activityId, code: 200 });
     } else {
-      throw ({ message: "Unable to delete ContactActivity for Contact Activityid : " + req.params.activityId, code: 500 });
+      throw ({ message: "Contact Activitys not found for the given contactId : " + query.where.contactId + " activityId : " + query.where.id, code: 500 });
     }
   } catch (err) {
     res.status(500).send({
@@ -121,4 +136,3 @@ exports.delete = async (req, res) => {
     });
   }
 };
-

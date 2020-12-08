@@ -1,4 +1,4 @@
-/contact/{contactId}/activitys:
+/contacts/{contactId}/activity:
   post:
     tags: ["Contact Activity"]
     description: create Contact Activity
@@ -8,21 +8,6 @@
       - name: contactId
         description: contactId of the ContactActivity.
         in: path
-        required: true
-        type: string
-      - name: activityId
-        description: activityId of the ContactActivity.
-        in: formData
-        required: true
-        type: string
-      - name: field1
-        description: field1 of the ContactActivity.
-        in: formData
-        required: true
-        type: string
-      - name: field2
-        description: field2 of the ContactActivity.
-        in: formData
         required: true
         type: string
       - name: field3
@@ -77,7 +62,7 @@
       200:
         description: Contact Activity      
         
-/contact/{contactId}/activitys/{activityId}:
+/contacts/{contactId}/activitys/{activityId}:
   get:
     tags: ["Contact Activity"]
     description: Contact Activity
@@ -113,16 +98,6 @@
         description: activityId of the ContactActivity.
         in: path
         required: true
-        type: string
-      - name: field1
-        description: field1 of the ContactActivity.
-        in: formData
-        required: false
-        type: string
-      - name: field2
-        description: field2 of the ContactActivity.
-        in: formData
-        required: false
         type: string
       - name: field3
         description: field3 of the ContactActivity.

@@ -1,5 +1,6 @@
 const replace = require('replace-in-file');
-const fs = require('fs');
+
+
 
 const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -7,7 +8,11 @@ const capitalizeFirstLetter = (string) => {
 
 const distFileDir = './dist';
 const angularDistFileDir = './dist';
+const modelFileDir = './models';
+const migrationsFileDir = './migrations';
 const fsExtra = require('fs-extra')
+const fs = require("fs")
+const path = require("path")
 // fsExtra.emptyDirSync(distFileDir);
 // fsExtra.emptyDirSync('./models');
 // fsExtra.emptyDirSync('./migrations');
@@ -22,6 +27,9 @@ var args = process.argv.slice(3);
 if (args[2] == "cleardist=true") {
     fsExtra.emptyDirSync(distFileDir)
     fsExtra.emptyDirSync(angularDistFileDir)
+    fsExtra.emptyDirSync(modelFileDir)
+    fsExtra.emptyDirSync(migrationsFileDir)
+
     console.log("cleared dist")
 }
 
@@ -42,6 +50,10 @@ var migrationFields = "";
 
 const { exec } = require("child_process");
 
+console.log("capitalTemplateName----------------")
+
+console.log(capitalTemplateName)
+
 // remove "s" from parent-child:
 if (isChildCheck != "child=false" && (templateName.substr(-1) == 's' || templateName.substr(-1) == "S")) {
     templateName = templateName.slice(0, -1)
@@ -61,6 +73,8 @@ var childtemplateDistDir = './dist/' + childfileName;
 var storagetemplateDistDir = './dist/' + storageFileName;
 var angulartemplateDistDir = './dist/' + angularTemplateName;
 
+
+
 // With a callback:
 const generateTemplate = async () => {
 
@@ -70,9 +84,31 @@ const generateTemplate = async () => {
 
     const files = await fsExtra.readdir(templateDistDir);
     for (let name of files) {
-        let workingDir = templateDistDir + '/' + name;
-        let destinationDir = workingDir.replace(/contact/g, templateName)
+        var workingDir = templateDistDir + '/' + name;
+        var destinationDir = workingDir.replace(/contact/g, templateName)
+        //await fsExtra.ensureDir(destinationDir);
         await fsExtra.rename(workingDir, destinationDir);
+        console.log("------------")
+
+        if (("./dist/" + templateName + "/" + templateName + ".controller.js") === destinationDir) {
+            
+            const pathToFile = path.join(__dirname, destinationDir)
+            const pathToNewDestination = path.join(__dirname, "controllers", "destinationDir")
+
+            fs.copyFile(pathToFile, pathToNewDestination, function (err) {
+                if (err) {
+                    throw err
+                } else {
+                    console.log("Successfully copied and moved the file!")
+                }
+            })
+
+            fs.rename("./controllers/destinationDir","./dist/" + templateName + "/" + templateName + ".controller.js" , function(err) {
+                if ( err ) console.log('ERROR: ' + err);
+            });
+        
+        }
+
     };
     const options = {
         files: [
@@ -120,8 +156,8 @@ const generateTemplate = async () => {
                 './dist/' + templateName + '/*.yaml'
             ],
             //Replacement for  fields (string or regex) 
-            from: [regex,/whereFieldParam/g],
-            to: [args[argument],args[3]],
+            from: [regex, /whereFieldParam/g],
+            to: [args[argument], args[3]],
         };
         await replace(option);
     }
@@ -187,10 +223,11 @@ const generateChildTemplate = async () => {
     await replace(options);
 
     //Adding fields to controller and yaml
+    var fieldString = "field";
 
     for (argument = 3; argument < args.length; argument++) {
         var field = "field" + argument;
-        var fieldString = "field";
+        fieldString = "field";
 
         var expression = `${field}`
         var regex = new RegExp(expression, 'g')
@@ -201,6 +238,7 @@ const generateChildTemplate = async () => {
             args[argument] = args[argument].slice(0, -1)
 
         }
+
         const option = {
             files: [
                 './dist/' + childfileName + '/*.*',
@@ -231,7 +269,7 @@ const generateChildTemplate = async () => {
 
     //migration file command
     await exec("sequelize init");
-    await exec("sequelize model:generate --name " + childfileName + " --attributes  " + migrationFields)
+    await exec("sequelize model:generate --name " + childfileName + " --attributes  " + templateName + 'Id' + ":string," + migrationFields)
 
     console.log('*******************************');
     console.log('Child Template generated successfully');
@@ -336,7 +374,7 @@ const generateStorageTemplate = async () => {
 //     await fsExtra.copy('./storagetemplate', storagetemplateDistDir);
 
 //     const files = await fsExtra.readdir(storagetemplateDistDir);
-       
+
 //     console.log("storagetemplateDistDir--")
 //     console.log(storagetemplateDistDir)
 

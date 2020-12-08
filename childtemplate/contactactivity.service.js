@@ -1,5 +1,5 @@
 const db = require("../models");
-const ContactActivityModel = db.contactActivitysModel
+const ContactActivityModel = db.contactactivitysModel
 const ContactModel = db.contactsModel
 
 
@@ -63,21 +63,14 @@ exports.update = async (data, query) => {
     }
 }
 
-exports.delete = async (contactId, activityId) => {
+exports.delete = async (query) => {
     const t = await db.sequelize.transaction();
     try {
-    
-        const query = {
-            where: {
-                contactId: contactId,
-                id: activityId
-            }
-        }
-        await ContactActivityModel.destroy(query, { transaction: t });
+        var updatedContactActivity =await ContactActivityModel.destroy(query, { transaction: t });
         await t.commit();
-        return ({ message: "delete success for id: " + contactActivity.id, code: 200 });
+        return updatedContactActivity;
     } catch (err) {
-        await t.rollback();
+        // await t.rollback();
         throw ({ message: err.message || "Error occurred while deleting the Contact Activity.", code: err.code || 500 });
     }
 }
