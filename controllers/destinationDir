@@ -1,6 +1,6 @@
-var ContactService = require('../services/contact.service');
-
 const { validationResult } = require('express-validator');
+
+const ContactService = require('../services/contact.service');
 
 exports.create = async (req, res) => {
   const errors = validationResult(req);
@@ -29,7 +29,7 @@ exports.create = async (req, res) => {
     const foundContact = await ContactService.get(query);
     if (foundContact)
       throw ({ message: "Contact found for the given contact whereFieldParam: " + query.where.whereFieldParam, code: 500 });
-    var newContact = await ContactService.create(contact);
+    const newContact = await ContactService.create(contact);
     res.send(newContact);
   } catch (err) {
     res.status(500).send({
@@ -45,7 +45,7 @@ exports.getAll = async (req, res) => {
     const page = req.query.page ? req.query.page : 1;
     const limit = req.query.limit ? req.query.limit : 10;
 
-    var contact = await ContactService.getAll(page, limit);
+    const contact = await ContactService.getAll(page, limit);
     res.send(contact);
   } catch (err) {
     res.status(500).send({
@@ -61,7 +61,7 @@ exports.get = async (req, res) => {
         id: req.params.id
       }
     }
-    var contact = await ContactService.get(query);
+    const contact = await ContactService.get(query);
     if (!contact)
       throw ({ message: "Contact not found for the given contact id: " + query.where.id, code: 404 });
     res.send(contact);
@@ -98,10 +98,10 @@ exports.update = async (req, res) => {
       }
 
     }
-    let foundContact = await ContactService.get(query);
+    const foundContact = await ContactService.get(query);
     if (!foundContact)
       throw ({ message: "Contact not found for the given contact id: " + query.where.id, code: 500 });
-    var updatedContact = await ContactService.update(contact, query);
+    const updatedContact = await ContactService.update(contact, query);
     res.send(updatedContact);
   } catch (err) {
     res.status(500).send({

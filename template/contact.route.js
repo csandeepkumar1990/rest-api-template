@@ -1,9 +1,9 @@
+const express = require('express');
+const router = express.Router();
+//const auth = require('./auth');
+
 const ContactController = require('../controllers/contact.controller.js');
 //const ContactFilesController = require('../controllers/contactfiles.controller.js');
-
-const express = require('express');
-var router = express.Router();
-//const auth = require('./auth');
 
 router.post('/',  ContactController.create);
 router.get('/',  ContactController.getAll);
