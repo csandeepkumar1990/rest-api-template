@@ -15,7 +15,7 @@ const fs = require("fs")
 const path = require("path")
 // fsExtra.emptyDirSync(distFileDir);
 // fsExtra.emptyDirSync('./models');
-// fsExtra.emptyDirSync('./migrations');
+// fsExtra.emptyDirSync('./migrations');;
 
 var arguments = process.argv.slice(2, 3);
 var arguments2 = process.argv.slice(3);
@@ -82,7 +82,9 @@ const generateTemplate = async () => {
     await fsExtra.copy('./template', templateDistDir);
 
 
-    const files = await fsExtra.readdir(templateDistDir);
+    let files = await fsExtra.readdir(templateDistDir);
+    console.log("templateDistDir=-----***********888")
+    console.log(templateDistDir)
     for (let name of files) {
         var workingDir = templateDistDir + '/' + name;
         var destinationDir = workingDir.replace(/contact/g, templateName)
@@ -90,24 +92,14 @@ const generateTemplate = async () => {
         await fsExtra.rename(workingDir, destinationDir);
         console.log("------------")
 
-        if (("./dist/" + templateName + "/" + templateName + ".controller.js") === destinationDir) {
-            
-            const pathToFile = path.join(__dirname, destinationDir)
-            const pathToNewDestination = path.join(__dirname, "controllers", "destinationDir")
-
-            fs.copyFile(pathToFile, pathToNewDestination, function (err) {
-                if (err) {
-                    throw err
-                } else {
-                    console.log("Successfully copied and moved the file!")
-                }
-            })
-
-            fs.rename("./controllers/destinationDir","./dist/" + templateName + "/" + templateName + ".controller.js" , function(err) {
-                if ( err ) console.log('ERROR: ' + err);
-            });
+        var path = require("path");
+        console.log("destinationDir---------------")
+        console.log(destinationDir)
+        let fileName = "./dist/" + templateName + "/" + templateName + ".controller.js";
         
-        }
+        let file = path.basename(fileName);
+
+        console.log(file);
 
     };
     const options = {
@@ -179,6 +171,89 @@ const generateTemplate = async () => {
         to: [''],
     };
     await replace(dropFieldsOption);
+
+    files = await fsExtra.readdir(templateDistDir);
+
+    for (let name of files) {
+        var workingDir = templateDistDir + '/' + name;
+        var destinationDir = workingDir.replace(/contact/g, templateName)
+        //await fsExtra.ensureDir(destinationDir);
+        await fsExtra.rename(workingDir, destinationDir);
+        console.log("------------")
+
+        var path = require("path");
+        console.log("destinationDir---------------")
+        console.log(destinationDir)
+        let fileName = "./dist/" + templateName + "/" + templateName + ".controller.js";
+        
+        let file = path.basename(fileName);
+
+        console.log(file);
+
+        if (("./dist/" + templateName + "/" + templateName + ".controller.js") === destinationDir) {
+            var pathToFile = path.join(__dirname, destinationDir)
+            var pathToNewDestination = path.join(__dirname, "controllers", file)
+
+            fs.copyFile(pathToFile, pathToNewDestination, function (err) {
+                if (err) {
+                    throw err
+                } else {
+                    console.log("Successfully copied and moved the file!")
+                }
+            })
+        }
+        else if (("./dist/" + templateName + "/" + templateName + ".route.js") === destinationDir) {
+             fileName = "./dist/" + templateName + "/" + templateName + ".route.js";
+        
+             file = path.basename(fileName);
+
+             pathToFile = path.join(__dirname, destinationDir)
+             pathToNewDestination = path.join(__dirname, "routes", file)
+             console.log(pathToFile)
+             console.log(pathToNewDestination)
+
+            fs.copyFile(pathToFile, pathToNewDestination, function (err) {
+                if (err) {
+                    throw err
+                } else {
+                    console.log("Successfully copied and moved the file!")
+                }
+            })
+        }
+        else if (("./dist/" + templateName + "/" + templateName + ".service.js") === destinationDir) {
+            fileName = "./dist/" + templateName + "/" + templateName + ".service.js";
+        
+            file = path.basename(fileName);
+            const pathToFile = path.join(__dirname, destinationDir)
+            const pathToNewDestination = path.join(__dirname, "services", file)
+
+            fs.copyFile(pathToFile, pathToNewDestination, function (err) {
+                if (err) {
+                    throw err
+                } else {
+                    console.log("Successfully copied and moved the file!")
+                }
+            })
+        }
+        else if (("./dist/" + templateName + "/" + templateName + ".yaml") === destinationDir) {
+            fileName = "./dist/" + templateName + "/" + templateName + ".yaml";
+        
+            file = path.basename(fileName);
+            const pathToFile = path.join(__dirname, destinationDir)
+            const pathToNewDestination = path.join(__dirname, "docs", file)
+
+            fs.copyFile(pathToFile, pathToNewDestination, function (err) {
+                if (err) {
+                    throw err
+                } else {
+                    console.log("Successfully copied and moved the file!")
+                }
+            })
+        }
+
+    };
+
+    
 
 
     //migration file command

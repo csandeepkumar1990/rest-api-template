@@ -1,0 +1,209 @@
+/temp:
+  post:
+    tags: ["Temp"]
+    description: create temp
+    produces:
+      - application/json
+    parameters:
+      - name: aa
+        description: aa of the temp.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: temp
+
+  get:
+    tags: ["Temp"]
+    description: temp
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the temp.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the temp.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: temp        
+
+/temp/{id}:
+  get:
+    tags: ["Temp"]
+    description: temp
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: tempid of the temp.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: temp
+
+
+  put:
+    tags: ["Temp"]
+    description: Update a temp
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: tempid of the temp.
+        in: path
+        required: true
+        type: string
+      - name: aa
+        description: aa of the temp.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+      
+    responses:
+      200:
+        description: temp   
+
+  delete:
+    tags: ["Temp"]
+    description: Delete a temp
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: tempid of the temp.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: temp        

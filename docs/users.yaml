@@ -1,0 +1,209 @@
+/users:
+  post:
+    tags: ["Users"]
+    description: create users
+    produces:
+      - application/json
+    parameters:
+      - name: aa
+        description: aa of the users.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: users
+
+  get:
+    tags: ["Users"]
+    description: users
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the users.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the users.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: users        
+
+/users/{id}:
+  get:
+    tags: ["Users"]
+    description: users
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: usersid of the users.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: users
+
+
+  put:
+    tags: ["Users"]
+    description: Update a users
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: usersid of the users.
+        in: path
+        required: true
+        type: string
+      - name: aa
+        description: aa of the users.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+
+
+        in: formData
+        required: false
+        type: string
+      
+    responses:
+      200:
+        description: users   
+
+  delete:
+    tags: ["Users"]
+    description: Delete a users
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: usersid of the users.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: users        
