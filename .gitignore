@@ -9,3 +9,5 @@
 # images
 /public/images/upload_images/*
 /public/files/*
+/models
+/migrations
