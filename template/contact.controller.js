@@ -17,6 +17,16 @@ exports.create = async (req, res) => {
     field8: req.body.field8,
     field9: req.body.field9,
     field10: req.body.field10,
+    field11: req.body.field11,
+    field12: req.body.field12,
+    field13: req.body.field13,
+    field14: req.body.field14,
+    field15: req.body.field15,
+    field16: req.body.field16,
+    field17: req.body.field17,
+    field18: req.body.field18,
+    field19: req.body.field19,
+    field20: req.body.field20,
     createdBy: req.body.createdBy
   };
 
@@ -89,6 +99,16 @@ exports.update = async (req, res) => {
       field8: req.body.field8,
       field9: req.body.field9,
       field10: req.body.field10,
+      field11: req.body.field11,
+      field12: req.body.field12,
+      field13: req.body.field13,
+      field14: req.body.field14,
+      field15: req.body.field15,
+      field16: req.body.field16,
+      field17: req.body.field17,
+      field18: req.body.field18,
+      field19: req.body.field19,
+      field20: req.body.field20,
       updatedBy: req.body.updatedBy
     }
 

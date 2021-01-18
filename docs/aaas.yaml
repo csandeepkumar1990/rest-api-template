@@ -1,259 +1,259 @@
-/contact:
+/aaas:
   post:
-    tags: ["Contact"]
-    description: create contact
+    tags: ["Aaas"]
+    description: create aaas
     produces:
       - application/json
     parameters:
-      - name: field3
-        description: field3 of the contact.
+      - name: a
+        description: a of the aaas.
         in: formData
         required: true
         type: string
-      - name: field4
-        description: field4 of the contact.
+      - name: b
+        description: b of the aaas.
         in: formData
         required: true
         type: string
-      - name: field5
-        description: field5 of the contact.
+      - name: c
+        description: c of the aaas.
         in: formData
         required: true
         type: string
-      - name: field6
-        description: field6 of the contact.
+      - name: ccc
+        description: ccc of the aaas.
         in: formData
         required: true
         type: string
-      - name: field7
-        description: field7 of the contact.
+      - name: cccc
+        description: cccc of the aaas.
         in: formData
         required: true
         type: string
-      - name: field8
-        description: field8 of the contact.
+      - name: d
+        description: d of the aaas.
         in: formData
         required: true
         type: string
-      - name: field9
-        description: field9 of the contact.
+      - name: ddd
+        description: ddd of the aaas.
         in: formData
         required: true
         type: string
-      - name: field10
-        description: field10 of the contact.
+      - name: ee
+        description: ee of the aaas.
         in: formData
         required: true
         type: string
-      - name: field11
-        description: field11 of the contact.
+      - name: eeee
+        description: eeee of the aaas.
         in: formData
         required: true
         type: string
-      - name: field12
-        description: field12 of the contact.
+      - name: ef
+        description: ef of the aaas.
         in: formData
         required: true
         type: string
-      - name: field13
-        description: field13 of the contact.
+      - name: er
+        description: er of the aaas.
         in: formData
         required: true
         type: string
-      - name: field14
-        description: field14 of the contact.
+      - name: et
+        description: et of the aaas.
         in: formData
         required: true
         type: string
-      - name: field15
-        description: field15 of the contact.
+      - name: ey
+        description: ey of the aaas.
         in: formData
         required: true
         type: string
-      - name: field16
-        description: field16 of the contact.
+      - name: eu
+        description: eu of the aaas.
         in: formData
         required: true
         type: string
-      - name: field17
-        description: field17 of the contact.
+
+
         in: formData
         required: true
         type: string
-      - name: field18
-        description: field18 of the contact.
+
+
         in: formData
         required: true
         type: string
-      - name: field19
-        description: field19 of the contact.
+
+
         in: formData
         required: true
         type: string
-      - name: field20
-        description: field20 of the contact.
+
+
         in: formData
         required: true
         type: string
      
     responses:
       200:
-        description: contact
+        description: aaas
 
   get:
-    tags: ["Contact"]
-    description: contact
+    tags: ["Aaas"]
+    description: aaas
     produces:
       - application/json
     parameters:
       - name: page
-        description: page of the contact.
+        description: page of the aaas.
         in: query
         required: true
         type: integer
       - name: limit
-        description: limit of the contact.
+        description: limit of the aaas.
         in: query
         required: true
         type: integer
     responses:
       200:
-        description: contact        
+        description: aaas        
 
-/contact/{id}:
+/aaas/{id}:
   get:
-    tags: ["Contact"]
-    description: contact
+    tags: ["Aaas"]
+    description: aaas
     produces:
       - application/json
     parameters:
       - name: id
-        description: contactid of the contact.
+        description: aaasid of the aaas.
         in: path
         required: true
         type: string     
     responses:
       200:
-        description: contact
+        description: aaas
 
 
   put:
-    tags: ["Contact"]
-    description: Update a contact
+    tags: ["Aaas"]
+    description: Update a aaas
     produces:
       - application/json
     parameters:
       - name: id
-        description: contactid of the contact.
+        description: aaasid of the aaas.
         in: path
         required: true
         type: string
-      - name: field3
-        description: field3 of the contact.
+      - name: a
+        description: a of the aaas.
         in: formData
         required: true
         type: string
-      - name: field4
-        description: field4 of the contact.
+      - name: b
+        description: b of the aaas.
         in: formData
         required: true
         type: string
-      - name: field5
-        description: field5 of the contact.
+      - name: c
+        description: c of the aaas.
         in: formData
         required: true
         type: string
-      - name: field6
-        description: field6 of the contact.
+      - name: ccc
+        description: ccc of the aaas.
         in: formData
         required: true
         type: string
-      - name: field7
-        description: field7 of the contact.
+      - name: cccc
+        description: cccc of the aaas.
         in: formData
         required: true
         type: string
-      - name: field8
-        description: field8 of the contact.
+      - name: d
+        description: d of the aaas.
         in: formData
         required: true
         type: string
-      - name: field9
-        description: field9 of the contact.
+      - name: ddd
+        description: ddd of the aaas.
         in: formData
         required: true
         type: string
-      - name: field10
-        description: field10 of the contact.
+      - name: ee
+        description: ee of the aaas.
         in: formData
         required: true
         type: string
-      - name: field11
-        description: field11 of the contact.
+      - name: eeee
+        description: eeee of the aaas.
         in: formData
         required: true
         type: string
-      - name: field12
-        description: field12 of the contact.
+      - name: ef
+        description: ef of the aaas.
         in: formData
         required: true
         type: string
-      - name: field13
-        description: field13 of the contact.
+      - name: er
+        description: er of the aaas.
         in: formData
         required: true
         type: string
-      - name: field14
-        description: field14 of the contact.
+      - name: et
+        description: et of the aaas.
         in: formData
         required: true
         type: string
-      - name: field15
-        description: field15 of the contact.
+      - name: ey
+        description: ey of the aaas.
         in: formData
         required: true
         type: string
-      - name: field16
-        description: field16 of the contact.
+      - name: eu
+        description: eu of the aaas.
         in: formData
         required: true
         type: string
-      - name: field17
-        description: field17 of the contact.
+
+
         in: formData
         required: true
         type: string
-      - name: field18
-        description: field18 of the contact.
+
+
         in: formData
         required: true
         type: string
-      - name: field19
-        description: field19 of the contact.
+
+
         in: formData
         required: true
         type: string
-      - name: field20
-        description: field20 of the contact.
+
+
         in: formData
         required: true
         type: string
       
     responses:
       200:
-        description: contact   
+        description: aaas   
 
   delete:
-    tags: ["Contact"]
-    description: Delete a contact
+    tags: ["Aaas"]
+    description: Delete a aaas
     produces:
       - application/json
     parameters:
       - name: id
-        description: contactid of the contact.
+        description: aaasid of the aaas.
         in: path
         required: true
         type: string 
     responses:
       200:
-        description: contact        
+        description: aaas        
