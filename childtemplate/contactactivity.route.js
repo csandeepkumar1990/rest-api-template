@@ -1,12 +1,12 @@
-const ContactactivityController = require('../controllers/contactactivitys.controller.js');
+const ContactactivityController = require('../controllers/contactactivity.controller.js');
 const express = require('express');
 var router = express.Router();
 
 
-router.post('/:contactId/activitys/',  ContactactivityController.create);
-router.get('/:contactId/activitys/',  ContactactivityController.getAll);
-router.get('/:contactId/activitys/:activityId',  ContactactivityController.get);
-router.put('/:contactId/activitys/:activityId', ContactactivityController.update);
-router.delete('/:contactId/activitys/:activityId', ContactactivityController.delete);
+router.post('/:contactId/activity/',  ContactactivityController.create);
+router.get('/:contactId/activity/',  ContactactivityController.getAll);
+router.get('/:contactId/activity/:activityId',  ContactactivityController.get);
+router.put('/:contactId/activity/:activityId', ContactactivityController.update);
+router.delete('/:contactId/activity/:activityId', ContactactivityController.delete);
 
 module.exports = router;

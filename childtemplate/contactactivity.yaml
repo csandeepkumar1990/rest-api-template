@@ -132,7 +132,7 @@
       200:
         description: Contact Activity      
         
-/contacts/{contactId}/activitys/{activityId}:
+/contacts/{contactId}/activity/{activityId}:
   get:
     tags: ["Contact Activity"]
     description: Contact Activity

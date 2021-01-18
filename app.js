@@ -96,7 +96,7 @@ const generateTemplate = async () => {
         console.log("destinationDir---------------")
         console.log(destinationDir)
         let fileName = "./dist/" + templateName + "/" + templateName + ".controller.js";
-        
+
         let file = path.basename(fileName);
 
         console.log(file);
@@ -185,7 +185,7 @@ const generateTemplate = async () => {
         console.log("destinationDir---------------")
         console.log(destinationDir)
         let fileName = "./dist/" + templateName + "/" + templateName + ".controller.js";
-        
+
         let file = path.basename(fileName);
 
         console.log(file);
@@ -203,14 +203,14 @@ const generateTemplate = async () => {
             })
         }
         else if (("./dist/" + templateName + "/" + templateName + ".route.js") === destinationDir) {
-             fileName = "./dist/" + templateName + "/" + templateName + ".route.js";
-        
-             file = path.basename(fileName);
+            fileName = "./dist/" + templateName + "/" + templateName + ".route.js";
 
-             pathToFile = path.join(__dirname, destinationDir)
-             pathToNewDestination = path.join(__dirname, "routes", file)
-             console.log(pathToFile)
-             console.log(pathToNewDestination)
+            file = path.basename(fileName);
+
+            pathToFile = path.join(__dirname, destinationDir)
+            pathToNewDestination = path.join(__dirname, "routes", file)
+            console.log(pathToFile)
+            console.log(pathToNewDestination)
 
             fs.copyFile(pathToFile, pathToNewDestination, function (err) {
                 if (err) {
@@ -222,7 +222,7 @@ const generateTemplate = async () => {
         }
         else if (("./dist/" + templateName + "/" + templateName + ".service.js") === destinationDir) {
             fileName = "./dist/" + templateName + "/" + templateName + ".service.js";
-        
+
             file = path.basename(fileName);
             const pathToFile = path.join(__dirname, destinationDir)
             const pathToNewDestination = path.join(__dirname, "services", file)
@@ -237,7 +237,7 @@ const generateTemplate = async () => {
         }
         else if (("./dist/" + templateName + "/" + templateName + ".yaml") === destinationDir) {
             fileName = "./dist/" + templateName + "/" + templateName + ".yaml";
-        
+
             file = path.basename(fileName);
             const pathToFile = path.join(__dirname, destinationDir)
             const pathToNewDestination = path.join(__dirname, "docs", file)
@@ -253,7 +253,7 @@ const generateTemplate = async () => {
 
     };
 
-    
+
 
 
     //migration file command
@@ -292,10 +292,30 @@ const generateChildTemplate = async () => {
         ],
         //Replacement to make (string or regex) 
         from: [/contact/g, /Contact/g, /activity/g, /Activity/g],
-        to: [templateName, capitalTemplateName, childtemplateName.slice(0, -1), capitalChildTemplateName.slice(0, -1)],
+        to: [templateName, capitalTemplateName, childtemplateName, capitalChildTemplateName],
     };
 
     await replace(options);
+
+
+
+
+    if (childtemplateName.substr(-1) == 's' || childtemplateName.substr(-1) == "S") {
+        var childTemplatename = childtemplateName + "Id";
+        var expression = `${childTemplatename}`
+        var regex = new RegExp(expression, 'g')
+
+        const optionsWithSlice = {
+            files: [
+                './dist/' + childfileName + '/*.*',
+                './dist/' + childfileName + '/*.yaml'
+            ],
+            //Replacement to make (string or regex) 
+            from: [regex],
+            to: [childtemplateName.slice(0, -1)+"Id"],
+        };
+        await replace(optionsWithSlice);
+    }
 
     //Adding fields to controller and yaml
     var fieldString = "field";
@@ -341,6 +361,9 @@ const generateChildTemplate = async () => {
         to: [''],
     };
     await replace(dropFieldsOption);
+    
+    console.log("childfileName****************************************************************")
+    console.log(childfileName)
 
     //migration file command
     await exec("sequelize init");

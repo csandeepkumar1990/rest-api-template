@@ -1,0 +1,259 @@
+/abcs:
+  post:
+    tags: ["Abcs"]
+    description: create abcs
+    produces:
+      - application/json
+    parameters:
+      - name: a
+        description: a of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: b
+        description: b of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: c
+        description: c of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ccc
+        description: ccc of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: cccc
+        description: cccc of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: d
+        description: d of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ddd
+        description: ddd of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ee
+        description: ee of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: eeee
+        description: eeee of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ef
+        description: ef of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: er
+        description: er of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: et
+        description: et of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ey
+        description: ey of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: eu
+        description: eu of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: aaaaa
+        description: aaaaa of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: d
+        description: d of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: eee
+        description: eee of the abcs.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: abcs
+
+  get:
+    tags: ["Abcs"]
+    description: abcs
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the abcs.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the abcs.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: abcs        
+
+/abcs/{id}:
+  get:
+    tags: ["Abcs"]
+    description: abcs
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: abcsid of the abcs.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: abcs
+
+
+  put:
+    tags: ["Abcs"]
+    description: Update a abcs
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: abcsid of the abcs.
+        in: path
+        required: true
+        type: string
+      - name: a
+        description: a of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: b
+        description: b of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: c
+        description: c of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ccc
+        description: ccc of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: cccc
+        description: cccc of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: d
+        description: d of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ddd
+        description: ddd of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ee
+        description: ee of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: eeee
+        description: eeee of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ef
+        description: ef of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: er
+        description: er of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: et
+        description: et of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: ey
+        description: ey of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: eu
+        description: eu of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: aaaaa
+        description: aaaaa of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: d
+        description: d of the abcs.
+        in: formData
+        required: true
+        type: string
+      - name: eee
+        description: eee of the abcs.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+      
+    responses:
+      200:
+        description: abcs   
+
+  delete:
+    tags: ["Abcs"]
+    description: Delete a abcs
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: abcsid of the abcs.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: abcs        

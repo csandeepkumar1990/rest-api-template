@@ -1,5 +1,5 @@
 const db = require("../models");
-const ContactActivityModel = db.contactactivitysModel
+const ContactActivityModel = db.contactactivityModel
 const ContactModel = db.contactsModel
 
 
@@ -32,7 +32,7 @@ exports.getAll = async (page, limit, contactId) => {
         return activity;
     } catch (err) {
         await t.rollback();
-        throw ({ message: err.message || 'Error occurred while retrieving the Contact Activitys.', code: err.code || 500 });
+        throw ({ message: err.message || 'Error occurred while retrieving the Contact Activity.', code: err.code || 500 });
     }
 }
 

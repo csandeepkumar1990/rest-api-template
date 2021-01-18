@@ -1,4 +1,4 @@
-var ContactActivityService = require('../services/contactactivitys.service');
+var ContactActivityService = require('../services/contactactivity.service');
 
 const { validationResult } = require('express-validator');
 
@@ -126,7 +126,7 @@ exports.update = async (req, res) => {
     }
     var contact = await ContactActivityService.get(query);
     if (!contact)
-    throw ({ message: "Contact Activitys not found for the given contactId : " + query.where.contactId + " activityId : " + query.where.activityId, code: 500 });
+    throw ({ message: "Contact Activity not found for the given contactId : " + query.where.contactId + " activityId : " + query.where.activityId, code: 500 });
     var updateContactActivity = await ContactActivityService.update(contactActivity, query);
     res.send(updateContactActivity);
   } catch (err) {
@@ -154,7 +154,7 @@ exports.delete = async (req, res) => {
     if (updatedContactActivity === 1) {
       res.status(200).send({ message: "delete success for Contact Activityid: " + req.params.activityId, code: 200 });
     } else {
-      throw ({ message: "Contact Activitys not found for the given contactId : " + query.where.contactId + " activityId : " + query.where.id, code: 500 });
+      throw ({ message: "Contact Activity not found for the given contactId : " + query.where.contactId + " activityId : " + query.where.id, code: 500 });
     }
   } catch (err) {
     res.status(500).send({
