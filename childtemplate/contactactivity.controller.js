@@ -126,7 +126,7 @@ exports.update = async (req, res) => {
     }
     var contact = await ContactActivityService.get(query);
     if (!contact)
-    throw ({ message: "Contact Activity not found for the given contactId : " + query.where.contactId + " activityId : " + query.where.activityId, code: 500 });
+    throw ({ message: "Contact Activity not found for the given contactId : " + query.where.contactId + " activityId : " + query.where.id, code: 500 });
     var updateContactActivity = await ContactActivityService.update(contactActivity, query);
     res.send(updateContactActivity);
   } catch (err) {
