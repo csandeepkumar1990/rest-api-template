@@ -1,0 +1,259 @@
+/reports:
+  post:
+    tags: ["Reports"]
+    description: create reports
+    produces:
+      - application/json
+    parameters:
+      - name: reportid
+        description: reportid of the reports.
+        in: formData
+        required: true
+        type: string
+      - name: name1
+        description: name1 of the reports.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: reports
+
+  get:
+    tags: ["Reports"]
+    description: reports
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the reports.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the reports.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: reports        
+
+/reports/{id}:
+  get:
+    tags: ["Reports"]
+    description: reports
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: reportsid of the reports.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: reports
+
+
+  put:
+    tags: ["Reports"]
+    description: Update a reports
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: reportsid of the reports.
+        in: path
+        required: true
+        type: string
+      - name: reportid
+        description: reportid of the reports.
+        in: formData
+        required: true
+        type: string
+      - name: name1
+        description: name1 of the reports.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+      
+    responses:
+      200:
+        description: reports   
+
+  delete:
+    tags: ["Reports"]
+    description: Delete a reports
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: reportsid of the reports.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: reports        
