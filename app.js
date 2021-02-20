@@ -13,9 +13,9 @@ const migrationsFileDir = './migrations';
 const fsExtra = require('fs-extra')
 const fs = require("fs")
 const path = require("path")
-// fsExtra.emptyDirSync(distFileDir);
-// fsExtra.emptyDirSync('./models');
-// fsExtra.emptyDirSync('./migrations');;
+fsExtra.emptyDirSync(distFileDir);
+fsExtra.emptyDirSync('./models');
+fsExtra.emptyDirSync('./migrations');;
 
 var arguments = process.argv.slice(2, 3);
 var arguments2 = process.argv.slice(3);

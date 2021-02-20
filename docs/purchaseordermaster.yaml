@@ -1,0 +1,259 @@
+/purchaseordermaster:
+  post:
+    tags: ["Purchaseordermaster"]
+    description: create purchaseordermaster
+    produces:
+      - application/json
+    parameters:
+      - name: projectId
+        description: projectId of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: approvalDate
+        description: approvalDate of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: approvedBy
+        description: approvedBy of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: purchaseOrderStatus
+        description: purchaseOrderStatus of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: name
+        description: name of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: type
+        description: type of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: totalAmount
+        description: totalAmount of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: purchaseordermaster
+
+  get:
+    tags: ["Purchaseordermaster"]
+    description: purchaseordermaster
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the purchaseordermaster.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the purchaseordermaster.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: purchaseordermaster        
+
+/purchaseordermaster/{id}:
+  get:
+    tags: ["Purchaseordermaster"]
+    description: purchaseordermaster
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: purchaseordermasterid of the purchaseordermaster.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: purchaseordermaster
+
+
+  put:
+    tags: ["Purchaseordermaster"]
+    description: Update a purchaseordermaster
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: purchaseordermasterid of the purchaseordermaster.
+        in: path
+        required: true
+        type: string
+      - name: projectId
+        description: projectId of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: approvalDate
+        description: approvalDate of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: approvedBy
+        description: approvedBy of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: purchaseOrderStatus
+        description: purchaseOrderStatus of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: name
+        description: name of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: type
+        description: type of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+      - name: totalAmount
+        description: totalAmount of the purchaseordermaster.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+      
+    responses:
+      200:
+        description: purchaseordermaster   
+
+  delete:
+    tags: ["Purchaseordermaster"]
+    description: Delete a purchaseordermaster
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: purchaseordermasterid of the purchaseordermaster.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: purchaseordermaster        

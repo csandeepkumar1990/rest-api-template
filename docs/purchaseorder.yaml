@@ -1,0 +1,259 @@
+/purchaseorder:
+  post:
+    tags: ["Purchaseorder"]
+    description: create purchaseorder
+    produces:
+      - application/json
+    parameters:
+      - name: bomId
+        description: bomId of the purchaseorder.
+        in: formData
+        required: true
+        type: string
+      - name: quantity
+        description: quantity of the purchaseorder.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: purchaseorder
+
+  get:
+    tags: ["Purchaseorder"]
+    description: purchaseorder
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the purchaseorder.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the purchaseorder.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: purchaseorder        
+
+/purchaseorder/{id}:
+  get:
+    tags: ["Purchaseorder"]
+    description: purchaseorder
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: purchaseorderid of the purchaseorder.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: purchaseorder
+
+
+  put:
+    tags: ["Purchaseorder"]
+    description: Update a purchaseorder
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: purchaseorderid of the purchaseorder.
+        in: path
+        required: true
+        type: string
+      - name: bomId
+        description: bomId of the purchaseorder.
+        in: formData
+        required: true
+        type: string
+      - name: quantity
+        description: quantity of the purchaseorder.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+      
+    responses:
+      200:
+        description: purchaseorder   
+
+  delete:
+    tags: ["Purchaseorder"]
+    description: Delete a purchaseorder
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: purchaseorderid of the purchaseorder.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: purchaseorder        

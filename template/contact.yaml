@@ -109,12 +109,12 @@
       - name: page
         description: page of the contact.
         in: query
-        required: true
+        required: false
         type: integer
       - name: limit
         description: limit of the contact.
         in: query
-        required: true
+        required: false
         type: integer
     responses:
       200:
@@ -151,92 +151,92 @@
       - name: field3
         description: field3 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field4
         description: field4 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field5
         description: field5 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field6
         description: field6 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field7
         description: field7 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field8
         description: field8 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field9
         description: field9 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field10
         description: field10 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field11
         description: field11 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field12
         description: field12 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field13
         description: field13 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field14
         description: field14 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field15
         description: field15 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field16
         description: field16 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field17
         description: field17 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field18
         description: field18 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field19
         description: field19 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       - name: field20
         description: field20 of the contact.
         in: formData
-        required: true
+        required: false
         type: string
       
     responses:

@@ -1,0 +1,259 @@
+/tenantwidget:
+  post:
+    tags: ["Tenantwidget"]
+    description: create tenantwidget
+    produces:
+      - application/json
+    parameters:
+      - name: appId
+        description: appId of the tenantwidget.
+        in: formData
+        required: true
+        type: string
+      - name: widgetId
+        description: widgetId of the tenantwidget.
+        in: formData
+        required: true
+        type: string
+      - name: tenantId
+        description: tenantId of the tenantwidget.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: tenantwidget
+
+  get:
+    tags: ["Tenantwidget"]
+    description: tenantwidget
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the tenantwidget.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the tenantwidget.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: tenantwidget        
+
+/tenantwidget/{id}:
+  get:
+    tags: ["Tenantwidget"]
+    description: tenantwidget
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: tenantwidgetid of the tenantwidget.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: tenantwidget
+
+
+  put:
+    tags: ["Tenantwidget"]
+    description: Update a tenantwidget
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: tenantwidgetid of the tenantwidget.
+        in: path
+        required: true
+        type: string
+      - name: appId
+        description: appId of the tenantwidget.
+        in: formData
+        required: true
+        type: string
+      - name: widgetId
+        description: widgetId of the tenantwidget.
+        in: formData
+        required: true
+        type: string
+      - name: tenantId
+        description: tenantId of the tenantwidget.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+      
+    responses:
+      200:
+        description: tenantwidget   
+
+  delete:
+    tags: ["Tenantwidget"]
+    description: Delete a tenantwidget
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: tenantwidgetid of the tenantwidget.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: tenantwidget        

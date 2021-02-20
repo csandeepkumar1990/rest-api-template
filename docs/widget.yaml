@@ -1,0 +1,259 @@
+/widget:
+  post:
+    tags: ["Widget"]
+    description: create widget
+    produces:
+      - application/json
+    parameters:
+      - name: name
+        description: name of the widget.
+        in: formData
+        required: true
+        type: string
+      - name: type
+        description: type of the widget.
+        in: formData
+        required: true
+        type: string
+      - name: description
+        description: description of the widget.
+        in: formData
+        required: true
+        type: string
+      - name: tenantId
+        description: tenantId of the widget.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+     
+    responses:
+      200:
+        description: widget
+
+  get:
+    tags: ["Widget"]
+    description: widget
+    produces:
+      - application/json
+    parameters:
+      - name: page
+        description: page of the widget.
+        in: query
+        required: true
+        type: integer
+      - name: limit
+        description: limit of the widget.
+        in: query
+        required: true
+        type: integer
+    responses:
+      200:
+        description: widget        
+
+/widget/{id}:
+  get:
+    tags: ["Widget"]
+    description: widget
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: widgetid of the widget.
+        in: path
+        required: true
+        type: string     
+    responses:
+      200:
+        description: widget
+
+
+  put:
+    tags: ["Widget"]
+    description: Update a widget
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: widgetid of the widget.
+        in: path
+        required: true
+        type: string
+      - name: name
+        description: name of the widget.
+        in: formData
+        required: true
+        type: string
+      - name: type
+        description: type of the widget.
+        in: formData
+        required: true
+        type: string
+      - name: description
+        description: description of the widget.
+        in: formData
+        required: true
+        type: string
+      - name: tenantId
+        description: tenantId of the widget.
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+
+
+        in: formData
+        required: true
+        type: string
+      
+    responses:
+      200:
+        description: widget   
+
+  delete:
+    tags: ["Widget"]
+    description: Delete a widget
+    produces:
+      - application/json
+    parameters:
+      - name: id
+        description: widgetid of the widget.
+        in: path
+        required: true
+        type: string 
+    responses:
+      200:
+        description: widget        
